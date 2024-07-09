@@ -1,9 +1,14 @@
 package com.fiap.lanchonete.infrastructure.adapters.products.repository;
 
-import com.fiap.lanchonete.infrastructure.adapters.products.entidades.ProductEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-
+import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.fiap.lanchonete.domain.products.Category;
+import com.fiap.lanchonete.infrastructure.adapters.products.entidades.ProductEntity;
+
 public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {
+
+    List<ProductEntity> findByCategory(Category category);
 }

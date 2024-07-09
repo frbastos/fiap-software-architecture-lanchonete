@@ -1,15 +1,16 @@
 package com.fiap.lanchonete.infrastructure.adapters.products.repository;
 
-import com.fiap.lanchonete.domain.products.Product;
-import com.fiap.lanchonete.domain.products.ports.ProductRepositoryPort;
-import com.fiap.lanchonete.infrastructure.adapters.products.entidades.ProductEntity;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fiap.lanchonete.domain.products.Category;
+import com.fiap.lanchonete.domain.products.Product;
+import com.fiap.lanchonete.domain.products.ports.ProductRepositoryPort;
+import com.fiap.lanchonete.infrastructure.adapters.products.entidades.ProductEntity;
 
 @Component
 public class ProductRepositoryImpl implements ProductRepositoryPort {
@@ -18,15 +19,10 @@ public class ProductRepositoryImpl implements ProductRepositoryPort {
     private ProductRepository productRepository;
 
     @Override
-    public void save(Product product) {
+    public Product save(Product product) {
         ProductEntity productEntity = new ProductEntity(product);
-        this.productRepository.save(productEntity);
-    }
-
-    @Override
-    public void update(Product product) {
-        ProductEntity productEntity = new ProductEntity(product);
-        this.productRepository.save(productEntity);
+        productEntity =  this.productRepository.save(productEntity);
+        return productEntity.toProduct();
     }
 
     @Override
@@ -42,5 +38,10 @@ public class ProductRepositoryImpl implements ProductRepositoryPort {
     @Override
     public Optional<Product> getById(UUID id) {
         return this.productRepository.findById(id).map(ProductEntity::toProduct);
+    }
+
+    @Override
+    public List<Product> getByCategory(Category category) {
+        return this.productRepository.findByCategory(category).stream().map(ProductEntity::toProduct).toList();
     }
 }

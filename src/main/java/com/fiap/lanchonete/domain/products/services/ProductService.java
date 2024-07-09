@@ -1,5 +1,10 @@
 package com.fiap.lanchonete.domain.products.services;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import com.fiap.lanchonete.domain.products.Category;
 import com.fiap.lanchonete.domain.products.Product;
 import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
 import com.fiap.lanchonete.domain.products.dto.ProductResponse;
@@ -7,11 +12,6 @@ import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
 import com.fiap.lanchonete.domain.products.ports.ProductRepositoryPort;
 import com.fiap.lanchonete.domain.products.ports.ProductServicePort;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 public class ProductService implements ProductServicePort {
 
@@ -22,21 +22,23 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public void save(ProductPersistence persistence) {
+    public ProductResponse save(ProductPersistence persistence) {
         Product product = new Product(persistence);
-        this.productRepository.save(product);
+        product = this.productRepository.save(product);
+        return product.toProdutcResponse();
     }
 
     @Override
-    public void update(UUID id, ProductUpdate update) {
-        Product product = this.getById(id).orElseThrow(NotFoundException::new);
+    public ProductResponse update(UUID id, ProductUpdate update) {
+        Product product = this.productRepository.getById(id).orElseThrow((NotFoundException::new));
         product.update(update);
-        this.productRepository.save(product);
+        product = this.productRepository.save(product);
+        return product.toProdutcResponse();
     }
 
     @Override
     public void remove(UUID id) throws NotFoundException {
-        Product product = this.getById(id).orElseThrow(NotFoundException::new);
+        Product product = this.productRepository.getById(id).orElseThrow((NotFoundException::new));
         this.productRepository.remove(product.getId());
     }
 
@@ -46,7 +48,17 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public Optional<Product> getById(UUID id) {
-        return this.productRepository.getById(id);
+    public Optional<ProductResponse> getById(UUID id) throws NotFoundException{
+        return Optional.of(this.productRepository.getById(id).orElseThrow(NotFoundException::new).toProdutcResponse());
+    }
+
+    @Override
+    public List<ProductResponse> getByCategory(Category category) {
+        return this.productRepository.getByCategory(category).stream().map(Product::toProdutcResponse).toList();
+    }
+
+    @Override
+    public List<ProductResponse> getAllByCategory(Category category) {
+        return this.productRepository.getByCategory(category).stream().map(Product::toProdutcResponse).toList();
     }
 }
