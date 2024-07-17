@@ -6,6 +6,7 @@ import com.fiap.lanchonete.infrastructure.adapters.customers.entity.CustomerEnti
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -21,7 +22,9 @@ public class CustomerRepositoryImpl implements CustomerRepositoryPort {
     }
 
     @Override
-    public Optional<Customer> findName(String name) {
-        return Optional.empty();
+    public Optional<Customer> findCustomer(String name, String document, String mail) {
+        return this.customerRepository.findCustomer(name,document,mail).map(CustomerEntity::toCustomer);
     }
+
+
 }

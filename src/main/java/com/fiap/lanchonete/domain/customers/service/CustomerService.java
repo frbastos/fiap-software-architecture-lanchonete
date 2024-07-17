@@ -16,6 +16,11 @@ public class CustomerService implements CustomerServicePort {
         this.customerRepositoryPort = customerRepositoryPort;
     }
 
+    @Override
+    public Optional<CustomerResponse> findCustomer(String name, String document, String mail) {
+        return Optional.of(customerRepositoryPort.findCustomer(name, document,mail).orElseThrow(NotFoundException::new).customerToResponse());
+    }
+
 
     @Override
     public CustomerResponse save(CustomerPersistence customerPersistence) {
@@ -24,20 +29,5 @@ public class CustomerService implements CustomerServicePort {
         return customer.customerToResponse();
     }
 
-    @Override
-    public Optional<CustomerResponse> findName(String name) throws NotFoundException {
-        return Optional.of(this.customerRepositoryPort.findName(name).orElseThrow(NotFoundException::new).customerToResponse());
 
-
-    }
-
-    @Override
-    public CustomerResponse findDocument(String document) {
-        return null;
-    }
-
-    @Override
-    public CustomerResponse findMail(String main) {
-        return null;
-    }
 }
