@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.fiap.lanchonete.domain.products.Category;
 import com.fiap.lanchonete.domain.products.Product;
 import com.fiap.lanchonete.domain.products.ports.ProductRepositoryPort;
-import com.fiap.lanchonete.infrastructure.adapters.products.entidades.ProductEntity;
+import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
 
 @Component
 public class ProductRepositoryImpl implements ProductRepositoryPort {
