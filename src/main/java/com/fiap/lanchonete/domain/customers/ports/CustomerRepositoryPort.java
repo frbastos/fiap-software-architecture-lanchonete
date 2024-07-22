@@ -1,9 +1,8 @@
 package com.fiap.lanchonete.domain.customers.ports;
 
-import com.fiap.lanchonete.domain.customers.Customer;
-
-import java.util.List;
 import java.util.Optional;
+
+import com.fiap.lanchonete.domain.customers.Customer;
 
 public interface CustomerRepositoryPort {
 

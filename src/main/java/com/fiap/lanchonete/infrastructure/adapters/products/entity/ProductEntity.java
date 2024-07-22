@@ -1,4 +1,4 @@
-package com.fiap.lanchonete.infrastructure.adapters.products.entidades;
+package com.fiap.lanchonete.infrastructure.adapters.products.entity;
 
 import java.math.BigDecimal;
 import java.util.UUID;

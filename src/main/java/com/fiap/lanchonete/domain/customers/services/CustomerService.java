@@ -1,4 +1,6 @@
-package com.fiap.lanchonete.domain.customers.service;
+package com.fiap.lanchonete.domain.customers.services;
+
+import java.util.Optional;
 
 import com.fiap.lanchonete.domain.customers.Customer;
 import com.fiap.lanchonete.domain.customers.dto.CustomerPersistence;
@@ -6,8 +8,6 @@ import com.fiap.lanchonete.domain.customers.dto.CustomerResponse;
 import com.fiap.lanchonete.domain.customers.ports.CustomerRepositoryPort;
 import com.fiap.lanchonete.domain.customers.ports.CustomerServicePort;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
-
-import java.util.Optional;
 
 public class CustomerService implements CustomerServicePort {
 
