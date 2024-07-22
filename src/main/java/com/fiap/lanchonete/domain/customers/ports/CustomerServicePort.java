@@ -9,6 +9,6 @@ public interface CustomerServicePort {
 
     CustomerResponse save(CustomerPersistence customerPersistence);
 
-    Optional<CustomerResponse> findCustomer(String name, String document, String mail);
+    Optional<CustomerResponse> findCustomer(String document);
 
 }

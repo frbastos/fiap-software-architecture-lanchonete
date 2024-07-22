@@ -9,5 +9,5 @@ public interface CustomerRepositoryPort {
 
     Customer save (Customer customer);
 
-    Optional<Customer> findCustomer(String name, String document, String mail);
+    Optional<Customer> findCustomer( String document);
 }

@@ -22,8 +22,8 @@ public class CustomerRepositoryImpl implements CustomerRepositoryPort {
     }
 
     @Override
-    public Optional<Customer> findCustomer(String name, String document, String mail) {
-        return this.customerRepository.findCustomer(name,document,mail).map(CustomerEntity::toCustomer);
+    public Optional<Customer> findCustomer( String document) {
+        return this.customerRepository.findCustomer(document).map(CustomerEntity::toCustomer);
     }
 
 

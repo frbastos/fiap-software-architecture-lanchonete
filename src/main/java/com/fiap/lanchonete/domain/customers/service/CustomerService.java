@@ -17,8 +17,8 @@ public class CustomerService implements CustomerServicePort {
     }
 
     @Override
-    public Optional<CustomerResponse> findCustomer(String name, String document, String mail) {
-        return Optional.of(customerRepositoryPort.findCustomer(name, document,mail).orElseThrow(NotFoundException::new).customerToResponse());
+    public Optional<CustomerResponse> findCustomer(String document) {
+        return Optional.of(customerRepositoryPort.findCustomer( document).orElseThrow(NotFoundException::new).customerToResponse());
     }
 
 
