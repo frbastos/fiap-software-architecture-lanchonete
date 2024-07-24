@@ -69,7 +69,7 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 1. Clone o repositório:
    ```bash
    git clone https://github.com/frbastos/fiap-software-architecture-lanchonete.git
-   cd <nome-do-diretorio>
+   cd lanchonete
 
 3. Suba o ambiente:
     docker-compose up --build
