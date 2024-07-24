@@ -68,7 +68,7 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 
 1. Clone o repositório:
    ```bash
-   git clone <url-do-repositorio>
+   git clone https://github.com/frbastos/fiap-software-architecture-lanchonete.git
    cd <nome-do-diretorio>
 
 3. Suba o ambiente:
@@ -76,7 +76,8 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 
 ### Acesso ao H2 Database
 
-    Para acessar o H2 Database, utilize o seguinte endpoint: http://localhost:8080/h2-console
+Para acessar o H2 Database, utilize o seguinte endpoint:
+http://localhost:8080/h2-console
 
 - JDBC URL: jdbc:h2:mem:testdb
 - Username: sa
@@ -84,7 +85,8 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 
 ### Acesso ao Swagger
 
-    Para acessar a documentação Swagger da API, utilize o seguinte endpoint: http://localhost:8080/swagger-ui.html
+Para acessar a documentação Swagger da API, utilize o seguinte endpoint:
+http://localhost:8080/swagger-ui.html
     
 ### Infraestrutura para POC
 
@@ -101,7 +103,7 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 
 ### Licença
 
-    Este projeto está licenciado sob a MIT License.
+Este projeto está licenciado sob a MIT License.
 
 
 
