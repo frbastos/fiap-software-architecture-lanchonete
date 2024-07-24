@@ -29,11 +29,10 @@ public class CustomerResource {
     }
 
     @GetMapping("/search")
-    public CustomerResponse searchCustomer(@RequestParam(value = "name", required = false) String name,
-                                           @RequestParam(value = "document", required = false) String document,
-                                           @RequestParam(value = "mail", required = false) String mail) {
+    public CustomerResponse searchCustomer(@RequestParam(value = "document", required = false) String document
+                                          ) {
 
-        return this.customerService.findCustomer(name,document,mail).get();
+        return this.customerService.findCustomer(document).get();
 
     }
 
