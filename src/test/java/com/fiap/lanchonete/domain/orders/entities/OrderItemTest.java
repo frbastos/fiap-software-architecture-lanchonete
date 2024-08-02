@@ -1,4 +1,4 @@
-package com.fiap.lanchonete.domain.orders;
+package com.fiap.lanchonete.domain.orders.entities;
 
 import com.fiap.lanchonete.domain.products.Category;
 import com.fiap.lanchonete.domain.products.Product;
