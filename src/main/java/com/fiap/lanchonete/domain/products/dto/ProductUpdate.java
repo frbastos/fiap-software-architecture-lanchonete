@@ -10,6 +10,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record ProductUpdate(
         @NotBlank  String description,
-        @DecimalMin(value = "0.0") BigDecimal price,
+        @NotNull @DecimalMin(value = "0.0") BigDecimal price,
         @NotNull Category category) {
 }
