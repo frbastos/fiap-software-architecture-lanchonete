@@ -34,7 +34,7 @@ public class ProductsResource {
     }
 
     @PostMapping("")
-    public Product saveProduct(@Valid @RequestBody ProductPersistence persistence) {
+    public Product saveProduct(@RequestBody ProductPersistence persistence) {
         return this.productService.save(persistence);
     }
 

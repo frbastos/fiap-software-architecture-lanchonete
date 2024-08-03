@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
 import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
+import com.fiap.lanchonete.shared.validations.NumberValidator;
+import com.fiap.lanchonete.shared.validations.StringValidator;
 
 public class Product {
 
@@ -24,6 +26,19 @@ public class Product {
         this.description = persistence.description();
         this.price = persistence.price();
         this.category = persistence.category();
+        this.createValidation();
+    }
+
+    private void createValidation() {
+        if(StringValidator.isNullOrEmpty(description)){
+            throw new IllegalArgumentException("Description cannot be null or empty");
+        }
+        if(NumberValidator.isNegative(price)){
+            throw new IllegalArgumentException("Price cannot be null or negative");
+        }
+        if(getCategory() == null){
+            throw new IllegalArgumentException("Category cannot be null");
+        }
     }
 
     public void update(ProductUpdate update) {
