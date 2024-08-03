@@ -21,8 +21,6 @@ import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
 import com.fiap.lanchonete.domain.products.ports.ProductServicePort;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
 
-import jakarta.validation.Valid;
-
 @RestController
 @RequestMapping("products")
 public class ProductsResource {
@@ -39,7 +37,7 @@ public class ProductsResource {
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable("id") UUID id, @Valid @RequestBody ProductUpdate update) {
+    public Product updateProduct(@PathVariable("id") UUID id, @RequestBody ProductUpdate update) {
         return this.productService.update(id, update);
     }
 
