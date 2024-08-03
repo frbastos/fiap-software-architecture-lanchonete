@@ -1,11 +1,10 @@
 package com.fiap.lanchonete.domain.products;
 
-import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
-import com.fiap.lanchonete.domain.products.dto.ProductResponse;
-import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
-
 import java.math.BigDecimal;
 import java.util.UUID;
+
+import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
+import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
 
 public class Product {
 
@@ -47,10 +46,6 @@ public class Product {
 
     public Category getCategory() {
         return category;
-    }
-
-    public ProductResponse toProdutcResponse() {
-        return new ProductResponse(this.id, this.description, this.price, this.category);
     }
 
 }

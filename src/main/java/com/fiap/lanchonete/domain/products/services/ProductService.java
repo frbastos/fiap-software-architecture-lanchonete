@@ -7,7 +7,6 @@ import java.util.UUID;
 import com.fiap.lanchonete.domain.products.Category;
 import com.fiap.lanchonete.domain.products.Product;
 import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
-import com.fiap.lanchonete.domain.products.dto.ProductResponse;
 import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
 import com.fiap.lanchonete.domain.products.ports.ProductRepositoryPort;
 import com.fiap.lanchonete.domain.products.ports.ProductServicePort;
@@ -22,18 +21,16 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public ProductResponse save(ProductPersistence persistence) {
+    public Product save(ProductPersistence persistence) {
         Product product = new Product(persistence);
-        product = this.productRepository.save(product);
-        return product.toProdutcResponse();
+        return this.productRepository.save(product);
     }
 
     @Override
-    public ProductResponse update(UUID id, ProductUpdate update) {
+    public Product update(UUID id, ProductUpdate update) {
         Product product = this.productRepository.getById(id).orElseThrow((NotFoundException::new));
         product.update(update);
-        product = this.productRepository.save(product);
-        return product.toProdutcResponse();
+       return this.productRepository.save(product);
     }
 
     @Override
@@ -43,22 +40,22 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public List<ProductResponse> getAll() {
-        return this.productRepository.listAll().stream().map(Product::toProdutcResponse).toList();
+    public List<Product> getAll() {
+        return this.productRepository.listAll();
     }
 
     @Override
-    public Optional<ProductResponse> getById(UUID id) throws NotFoundException{
-        return Optional.of(this.productRepository.getById(id).orElseThrow(NotFoundException::new).toProdutcResponse());
+    public Optional<Product> getById(UUID id) throws NotFoundException{
+        return Optional.of(this.productRepository.getById(id).orElseThrow(NotFoundException::new));
     }
 
     @Override
-    public List<ProductResponse> getByCategory(Category category) {
-        return this.productRepository.getByCategory(category).stream().map(Product::toProdutcResponse).toList();
+    public List<Product> getByCategory(Category category) {
+        return this.productRepository.getByCategory(category);
     }
 
     @Override
-    public List<ProductResponse> getAllByCategory(Category category) {
-        return this.productRepository.getByCategory(category).stream().map(Product::toProdutcResponse).toList();
+    public List<Product> getAllByCategory(Category category) {
+        return this.productRepository.getByCategory(category);
     }
 }
