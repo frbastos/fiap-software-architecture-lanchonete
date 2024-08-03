@@ -20,16 +20,14 @@ public class Product {
         this.description = description;
         this.price = price;
         this.category = category;
+        this.validation();
     }
 
     public Product(ProductPersistence persistence) {
-        this.description = persistence.description();
-        this.price = persistence.price();
-        this.category = persistence.category();
-        this.createValidation();
+        this(null, persistence.description(), persistence.price(), persistence.category());
     }
 
-    private void createValidation() {
+    private void validation() {
         if(StringValidator.isNullOrEmpty(description)){
             throw new IllegalArgumentException("Description cannot be null or empty");
         }
@@ -45,6 +43,7 @@ public class Product {
         this.description = update.description();
         this.price = update.price();
         this.category = update.category();
+        this.validation();
     }
 
     public UUID getId() {
