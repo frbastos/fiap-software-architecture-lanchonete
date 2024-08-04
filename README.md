@@ -74,15 +74,6 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 3. Suba o ambiente:
     docker-compose up --build
 
-### Acesso ao H2 Database
-
-Para acessar o H2 Database, utilize o seguinte endpoint:
-http://localhost:8080/h2-console
-
-- JDBC URL: jdbc:h2:mem:testdb
-- Username: sa
-- Password: password
-
 ### Acesso ao Swagger
 
 Para acessar a documentação Swagger da API, utilize o seguinte endpoint:
@@ -100,6 +91,11 @@ http://localhost:8080/swagger-ui.html
 - Docker
 - Docker Compose
 - Swagger
+
+### Documentação complementar do projeto
+
+- https://global-gorilla-13f.notion.site/FIAP-Projeto-Lanchonete-26bfdcca5de84ce8974cbfad8286dcc2
+- https://miro.com/app/board/uXjVK3DvRAo=/?share_link_id=212036327976
 
 ### Licença
 
