@@ -7,6 +7,9 @@ WORKDIR /home/gradle/project
 # Copiar todos os arquivos do projeto para o contêiner
 COPY . .
 
+# Adicione permissão de execução ao script gradlew
+RUN chmod +x gradlew
+
 # Executar os testes do Gradle
 RUN ./gradlew test --no-daemon
 
