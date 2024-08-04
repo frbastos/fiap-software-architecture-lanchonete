@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.fiap.lanchonete.domain.products.Product;
-import com.fiap.lanchonete.infrastructure.adapters.products.entities.ProductEntity;
+import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
 
 @Component
 public class ProductMapper {
