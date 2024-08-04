@@ -31,3 +31,13 @@ spring:
         hibernate:
           format_sql: true
 
+# OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs
+
+# Swagger
+  swagger-ui:
+    path: /swagger-ui.html
+
+

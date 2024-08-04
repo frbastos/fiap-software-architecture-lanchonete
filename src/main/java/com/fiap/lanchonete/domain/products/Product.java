@@ -1,11 +1,12 @@
 package com.fiap.lanchonete.domain.products;
 
-import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
-import com.fiap.lanchonete.domain.products.dto.ProductResponse;
-import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
-
 import java.math.BigDecimal;
 import java.util.UUID;
+
+import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
+import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
+import com.fiap.lanchonete.shared.validations.NumberValidator;
+import com.fiap.lanchonete.shared.validations.StringValidator;
 
 public class Product {
 
@@ -19,18 +20,30 @@ public class Product {
         this.description = description;
         this.price = price;
         this.category = category;
+        this.validation();
     }
 
     public Product(ProductPersistence persistence) {
-        this.description = persistence.description();
-        this.price = persistence.price();
-        this.category = persistence.category();
+        this(null, persistence.description(), persistence.price(), persistence.category());
+    }
+
+    private void validation() {
+        if(StringValidator.isNullOrEmpty(description)){
+            throw new IllegalArgumentException("Description cannot be null or empty");
+        }
+        if(NumberValidator.isNegative(price)){
+            throw new IllegalArgumentException("Price cannot be null or negative");
+        }
+        if(getCategory() == null){
+            throw new IllegalArgumentException("Category cannot be null");
+        }
     }
 
     public void update(ProductUpdate update) {
         this.description = update.description();
         this.price = update.price();
         this.category = update.category();
+        this.validation();
     }
 
     public UUID getId() {
@@ -47,10 +60,6 @@ public class Product {
 
     public Category getCategory() {
         return category;
-    }
-
-    public ProductResponse toProdutcResponse() {
-        return new ProductResponse(this.id, this.description, this.price, this.category);
     }
 
 }
