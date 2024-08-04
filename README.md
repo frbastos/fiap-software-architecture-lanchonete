@@ -87,7 +87,7 @@ http://localhost:8080/swagger-ui.html
 ### Tecnologias Utilizadas
 
 - Java Spring Boot
-- Banco de dados H2
+- Banco de dados MYSQL
 - Docker
 - Docker Compose
 - Swagger
