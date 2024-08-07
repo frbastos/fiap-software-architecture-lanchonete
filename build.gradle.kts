@@ -31,15 +31,12 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.30")
 	implementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
-	implementation("org.springframework.boot:spring-boot-starter-amqp")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.amqp:spring-rabbit-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
 }
 
 tasks.withType<Test> {
