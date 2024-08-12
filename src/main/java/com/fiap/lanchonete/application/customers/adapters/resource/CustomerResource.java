@@ -1,5 +1,6 @@
 package com.fiap.lanchonete.application.customers.adapters.resource;
 
+import com.fiap.lanchonete.domain.customers.ports.in.RegisterCustomerInputPort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.lanchonete.domain.customers.dto.CustomerPersistence;
 import com.fiap.lanchonete.domain.customers.dto.CustomerResponse;
-import com.fiap.lanchonete.domain.customers.ports.CustomerServicePort;
+import com.fiap.lanchonete.domain.customers.ports.in.FindCustomerInputPort;
 
 import jakarta.validation.Valid;
 
@@ -17,15 +18,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/customers")
 public class CustomerResource {
 
-    private final CustomerServicePort customerService;
+    private final FindCustomerInputPort customerService;
+    private final RegisterCustomerInputPort registerCustomerInputPort;
 
-    public CustomerResource(CustomerServicePort customerService) {
+    public CustomerResource(FindCustomerInputPort customerService, RegisterCustomerInputPort registerCustomerInputPort) {
         this.customerService = customerService;
+        this.registerCustomerInputPort = registerCustomerInputPort;
     }
 
     @PostMapping("")
     public CustomerResponse saveCustomer(@Valid @RequestBody CustomerPersistence customerPersistence) {
-        return this.customerService.save(customerPersistence);
+        return this.registerCustomerInputPort.save(customerPersistence);
     }
 
     @GetMapping("/search")
