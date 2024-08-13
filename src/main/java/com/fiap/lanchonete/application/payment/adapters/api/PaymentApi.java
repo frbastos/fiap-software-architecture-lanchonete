@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/payment")
 public class PaymentApi {
 
-    private final CreatePaymentInputPort paymentService;
+    private final CreatePaymentInputPort createPaymentInputPort;
 
-    public PaymentApi(CreatePaymentInputPort paymentService){
-        this.paymentService = paymentService;
+    public PaymentApi(CreatePaymentInputPort createPaymentInputPort){
+        this.createPaymentInputPort = createPaymentInputPort;
     }
 
     @PostMapping("")
     public Payment savePayment(@Valid @RequestBody PaymentPersistence persistence){
-        return this.paymentService.createPayment(persistence);
+        return this.createPaymentInputPort.createPayment(persistence);
     }
 
 }

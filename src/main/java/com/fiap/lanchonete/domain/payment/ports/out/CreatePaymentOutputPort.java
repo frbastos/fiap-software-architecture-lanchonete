@@ -2,7 +2,7 @@ package com.fiap.lanchonete.domain.payment.ports.out;
 
 import com.fiap.lanchonete.domain.payment.models.Payment;
 
-public interface SavePaymentOutputPort {
+public interface CreatePaymentOutputPort {
 
-    Payment save(Payment payment);
+    Payment createPayment(Payment payment);
 }

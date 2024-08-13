@@ -1,6 +1,6 @@
 package com.fiap.lanchonete.infrastructure.adapters.payment.entity;
 
-import com.fiap.lanchonete.domain.payment.Payment;
+import com.fiap.lanchonete.domain.payment.models.Payment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -32,6 +32,11 @@ public class PaymentEntity {
     }
 
     public Payment toPayment() { return new Payment(this.id,this.price, this.time);
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.time = LocalDateTime.now();
     }
 
 
