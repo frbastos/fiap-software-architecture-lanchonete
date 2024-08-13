@@ -1,13 +1,18 @@
 package com.fiap.lanchonete.infrastructure.adapters.customers.entity;
 
-import com.fiap.lanchonete.domain.customers.Customer;
-import jakarta.persistence.*;
+import java.util.UUID;
+
+import com.fiap.lanchonete.domain.customers.models.Customer;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor

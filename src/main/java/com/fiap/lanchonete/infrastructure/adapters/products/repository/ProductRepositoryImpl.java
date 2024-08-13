@@ -7,13 +7,18 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fiap.lanchonete.domain.products.Category;
-import com.fiap.lanchonete.domain.products.Product;
-import com.fiap.lanchonete.domain.products.ports.ProductRepositoryPort;
+import com.fiap.lanchonete.domain.products.models.Category;
+import com.fiap.lanchonete.domain.products.models.Product;
+import com.fiap.lanchonete.domain.products.ports.out.GetAllProductsOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.GetProductByIdOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.GetProductsByCategoryOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.RemoveProductOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.SaveProductOutputPort;
 import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
 
 @Component
-public class ProductRepositoryImpl implements ProductRepositoryPort {
+public class ProductRepositoryImpl implements GetAllProductsOutputPort, GetProductByIdOutputPort,
+        GetProductsByCategoryOutputPort, RemoveProductOutputPort, SaveProductOutputPort {
 
     @Autowired
     private ProductRepository productRepository;
@@ -21,7 +26,7 @@ public class ProductRepositoryImpl implements ProductRepositoryPort {
     @Override
     public Product save(Product product) {
         ProductEntity productEntity = new ProductEntity(product);
-        productEntity =  this.productRepository.save(productEntity);
+        productEntity = this.productRepository.save(productEntity);
         return productEntity.toProduct();
     }
 
