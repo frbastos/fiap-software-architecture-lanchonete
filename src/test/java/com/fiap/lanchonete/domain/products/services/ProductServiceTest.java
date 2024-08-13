@@ -17,21 +17,58 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.fiap.lanchonete.domain.products.Category;
-import com.fiap.lanchonete.domain.products.Product;
-import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
-import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
-import com.fiap.lanchonete.domain.products.ports.ProductRepositoryPort;
+import com.fiap.lanchonete.domain.products.models.Category;
+import com.fiap.lanchonete.domain.products.models.Product;
+import com.fiap.lanchonete.domain.products.models.ProductPersistence;
+import com.fiap.lanchonete.domain.products.models.ProductUpdate;
+import com.fiap.lanchonete.domain.products.ports.out.GetAllProductsOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.GetProductByIdOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.GetProductsByCategoryOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.RemoveProductOutputPort;
+import com.fiap.lanchonete.domain.products.ports.out.SaveProductOutputPort;
+import com.fiap.lanchonete.domain.products.usecase.CreateProductUseCase;
+import com.fiap.lanchonete.domain.products.usecase.GetAllProductsUseCase;
+import com.fiap.lanchonete.domain.products.usecase.GetProductByIdUseCase;
+import com.fiap.lanchonete.domain.products.usecase.GetProductsByCategoryUseCase;
+import com.fiap.lanchonete.domain.products.usecase.RemoveProductUseCase;
+import com.fiap.lanchonete.domain.products.usecase.UpdateProductUseCase;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
 
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
 
     @InjectMocks
-    private ProductService productService;
+    private CreateProductUseCase createProductUseCase;
 
     @Mock
-    private ProductRepositoryPort productRepositoryPort;
+    private SaveProductOutputPort saveProductOutputPort;
+
+    @InjectMocks
+    private GetAllProductsUseCase getAllProductsUseCase;
+
+    @Mock
+    private GetAllProductsOutputPort getAllProductsOutputPort;
+
+    @InjectMocks
+    private GetProductByIdUseCase getProductByIdUseCase;
+
+    @Mock
+    private GetProductByIdOutputPort getProductByIdOutputPort;
+
+    @InjectMocks
+    private GetProductsByCategoryUseCase getProductsByCategoryUseCase;
+
+    @Mock
+    private GetProductsByCategoryOutputPort getProductsByCategoryOutputPort;
+
+    @InjectMocks
+    private RemoveProductUseCase removeProductUseCase;
+
+    @Mock
+    private RemoveProductOutputPort removeProductOutputPort;
+
+    @InjectMocks
+    private UpdateProductUseCase updateProductUseCase;
 
     @Captor
     private ArgumentCaptor<Product> productCaptor;
@@ -46,10 +83,10 @@ public class ProductServiceTest {
         ProductPersistence productPersistence = new ProductPersistence("X-Salda", new BigDecimal(25.50), Category.SNACK);
 
         // ACT
-        this.productService.save(productPersistence);
+        this.createProductUseCase.createProduct(productPersistence);
 
         // ASSERT
-        then(productRepositoryPort).should().save(productCaptor.capture());
+        then(saveProductOutputPort).should().save(productCaptor.capture());
 
         Product product = productCaptor.getValue();
 
@@ -64,10 +101,10 @@ public class ProductServiceTest {
         // ARRANGE
         ProductUpdate productUpdate = new ProductUpdate("X-Salda", new BigDecimal(25.50), Category.SNACK);
         UUID productId = UUID.randomUUID();
-        given(productRepositoryPort.getById(productId)).willReturn(Optional.of(product));
+        given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.of(product));
 
         // ACT
-        this.productService.update(productId, productUpdate);
+        this.updateProductUseCase.update(productId, productUpdate);
 
         // ASSERT
         then(product).should().update(productUpdate);
@@ -83,13 +120,13 @@ public class ProductServiceTest {
         // ARRANGE
         ProductUpdate productUpdate = new ProductUpdate("X-Salda", new BigDecimal(25.50), Category.SNACK);
         UUID productId = UUID.randomUUID();
-        given(productRepositoryPort.getById(productId)).willReturn(Optional.of(product));
+        given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.of(product));
 
         // ACT
-        this.productService.update(productId, productUpdate);
+        this.updateProductUseCase.update(productId, productUpdate);
 
         // ASSERT
-        then(productRepositoryPort).should().save(productCaptor.capture());
+        then(saveProductOutputPort).should().save(productCaptor.capture());
 
         Product product = productCaptor.getValue();
 
@@ -104,11 +141,11 @@ public class ProductServiceTest {
         // ARRANGE
         ProductUpdate productUpdate = new ProductUpdate("X-Salda", new BigDecimal(25.50), Category.SNACK);
         UUID productId = UUID.randomUUID();
-        given(productRepositoryPort.getById(productId)).willReturn(Optional.empty());
+        given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.empty());
 
         // ASSERT
         assertThrows(NotFoundException.class, 
-            () -> this.productService.update(productId, productUpdate));
+            () -> this.updateProductUseCase.update(productId, productUpdate));
     }
 
     @Test
@@ -117,13 +154,13 @@ public class ProductServiceTest {
         // ARRANGE
         UUID productId = UUID.randomUUID();
         given(product.getId()).willReturn(productId);
-        given(productRepositoryPort.getById(productId)).willReturn(Optional.of(product));
+        given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.of(product));
 
         // ACT
-        this.productService.remove(productId);
+        this.removeProductUseCase.remove(productId);
 
         // ASSERT
-        then(productRepositoryPort).should().remove(productId);
+        then(removeProductOutputPort).should().remove(productId);
     }
 
     @Test
@@ -131,11 +168,11 @@ public class ProductServiceTest {
         
         // ARRANGE
         UUID productId = UUID.randomUUID();
-        given(productRepositoryPort.getById(productId)).willReturn(Optional.empty());
+        given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.empty());
 
         // ASSERT
         assertThrows(NotFoundException.class, 
-            () -> this.productService.remove(productId));
+            () -> this.removeProductUseCase.remove(productId));
     }
 
     @Test
@@ -143,11 +180,11 @@ public class ProductServiceTest {
         
         // ARRANGE
         UUID productId = UUID.randomUUID();
-        given(productRepositoryPort.getById(productId)).willReturn(Optional.empty());
+        given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.empty());
 
         // ASSERT
         assertThrows(NotFoundException.class, 
-            () -> this.productService.getById(productId));
+            () -> this.getProductByIdUseCase.getById(productId));
     }
 
 }

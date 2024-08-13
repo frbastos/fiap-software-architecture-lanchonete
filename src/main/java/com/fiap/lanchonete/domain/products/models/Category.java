@@ -1,4 +1,4 @@
-package com.fiap.lanchonete.domain.products;
+package com.fiap.lanchonete.domain.products.models;
 
 public enum Category {
     SNACK,

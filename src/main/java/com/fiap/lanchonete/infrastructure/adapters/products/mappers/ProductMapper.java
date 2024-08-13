@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.fiap.lanchonete.domain.products.Product;
+import com.fiap.lanchonete.domain.products.models.Product;
 import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
 
 @Component

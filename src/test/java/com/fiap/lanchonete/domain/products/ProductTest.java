@@ -8,7 +8,9 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
+import com.fiap.lanchonete.domain.products.models.Category;
+import com.fiap.lanchonete.domain.products.models.Product;
+import com.fiap.lanchonete.domain.products.models.ProductUpdate;
 
 public class ProductTest {
 

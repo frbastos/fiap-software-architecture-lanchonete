@@ -1,10 +1,8 @@
-package com.fiap.lanchonete.domain.products;
+package com.fiap.lanchonete.domain.products.models;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import com.fiap.lanchonete.domain.products.dto.ProductPersistence;
-import com.fiap.lanchonete.domain.products.dto.ProductUpdate;
 import com.fiap.lanchonete.shared.validations.NumberValidator;
 import com.fiap.lanchonete.shared.validations.StringValidator;
 

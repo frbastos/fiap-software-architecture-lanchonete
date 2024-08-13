@@ -1,8 +1,8 @@
 package com.fiap.lanchonete.domain.customers.usecase;
 
-import com.fiap.lanchonete.domain.customers.Customer;
-import com.fiap.lanchonete.domain.customers.dto.CustomerPersistence;
-import com.fiap.lanchonete.domain.customers.dto.CustomerResponse;
+import com.fiap.lanchonete.domain.customers.models.Customer;
+import com.fiap.lanchonete.domain.customers.models.CustomerPersistence;
+import com.fiap.lanchonete.domain.customers.models.CustomerResponse;
 import com.fiap.lanchonete.domain.customers.ports.in.RegisterCustomerInputPort;
 import com.fiap.lanchonete.domain.customers.ports.out.RegisterCustomerOutputPort;
 

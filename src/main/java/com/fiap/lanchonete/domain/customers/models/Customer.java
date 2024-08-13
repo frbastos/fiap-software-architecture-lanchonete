@@ -1,7 +1,4 @@
-package com.fiap.lanchonete.domain.customers;
-
-import com.fiap.lanchonete.domain.customers.dto.CustomerPersistence;
-import com.fiap.lanchonete.domain.customers.dto.CustomerResponse;
+package com.fiap.lanchonete.domain.customers.models;
 
 import java.util.UUID;
 
