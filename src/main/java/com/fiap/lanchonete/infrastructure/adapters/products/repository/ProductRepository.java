@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.fiap.lanchonete.domain.products.Category;
+import com.fiap.lanchonete.domain.products.models.Category;
 import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, UUID> {

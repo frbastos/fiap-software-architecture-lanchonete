@@ -1,8 +1,6 @@
-package com.fiap.lanchonete.domain.products.dto;
+package com.fiap.lanchonete.domain.products.models;
 
 import java.math.BigDecimal;
-
-import com.fiap.lanchonete.domain.products.Category;
 
 public record ProductUpdate(
         String description,

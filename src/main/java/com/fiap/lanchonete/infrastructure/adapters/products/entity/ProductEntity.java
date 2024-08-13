@@ -3,8 +3,8 @@ package com.fiap.lanchonete.infrastructure.adapters.products.entity;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import com.fiap.lanchonete.domain.products.Category;
-import com.fiap.lanchonete.domain.products.Product;
+import com.fiap.lanchonete.domain.products.models.Category;
+import com.fiap.lanchonete.domain.products.models.Product;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

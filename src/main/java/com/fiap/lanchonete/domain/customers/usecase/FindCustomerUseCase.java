@@ -1,11 +1,11 @@
 package com.fiap.lanchonete.domain.customers.usecase;
 
-import com.fiap.lanchonete.domain.customers.dto.CustomerResponse;
+import java.util.Optional;
+
+import com.fiap.lanchonete.domain.customers.models.CustomerResponse;
 import com.fiap.lanchonete.domain.customers.ports.in.FindCustomerInputPort;
 import com.fiap.lanchonete.domain.customers.ports.out.FindCustomerOutputPort;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
-
-import java.util.Optional;
 
 public class FindCustomerUseCase implements FindCustomerInputPort {
 

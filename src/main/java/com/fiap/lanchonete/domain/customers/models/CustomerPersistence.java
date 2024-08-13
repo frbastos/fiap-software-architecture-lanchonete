@@ -1,4 +1,4 @@
-package com.fiap.lanchonete.domain.customers.dto;
+package com.fiap.lanchonete.domain.customers.models;
 
 import org.hibernate.validator.constraints.br.CPF;
 
