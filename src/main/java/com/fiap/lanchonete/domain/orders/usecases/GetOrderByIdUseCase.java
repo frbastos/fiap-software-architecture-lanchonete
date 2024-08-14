@@ -4,6 +4,7 @@ import com.fiap.lanchonete.domain.orders.models.Order;
 import com.fiap.lanchonete.domain.orders.ports.in.GetOrderByIdInputPort;
 import com.fiap.lanchonete.domain.orders.ports.out.GetOrderByIdOutputPort;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class GetOrderByIdUseCase implements GetOrderByIdInputPort {
@@ -15,7 +16,7 @@ public class GetOrderByIdUseCase implements GetOrderByIdInputPort {
     }
 
     @Override
-    public Order getOrderById(UUID id) {
+    public Optional<Order> getOrderById(UUID id) {
         return this.ordersRepository.getById(id);
     }
 

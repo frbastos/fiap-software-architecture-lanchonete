@@ -18,9 +18,10 @@ import java.util.UUID;
 public class OrderItemEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(targetEntity = ProductEntity.class)
+    
     private UUID productId;
 
     @DecimalMin("0.00")

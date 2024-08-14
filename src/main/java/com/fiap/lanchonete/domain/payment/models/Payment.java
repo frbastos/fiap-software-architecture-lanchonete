@@ -12,21 +12,26 @@ public class Payment {
     private BigDecimal price;
     private LocalDateTime time;
 
-    public Payment(BigDecimal price) {
+    private UUID idOrder;
+
+    public Payment(BigDecimal price, UUID idOrder) {
         this.id = id;
         this.price = price;
+        this.idOrder = idOrder;
     }
 
     public Payment(){}
 
-    public Payment(UUID id, BigDecimal price, LocalDateTime time) {
+    public Payment(UUID id, BigDecimal price, LocalDateTime time, UUID idOrder) {
         this.id = id;
         this.price = price;
         this.time = time;
+        this.idOrder = idOrder;
     }
 
     public Payment(PaymentPersistence persistence) {
         this.price = persistence.price();
+        this.idOrder = persistence.idOrder();
     }
 
     public UUID getId() {return id;}
@@ -35,4 +40,5 @@ public class Payment {
 
     public LocalDateTime getTime() {return time;}
 
+    public UUID getIdOrder(){return idOrder;}
 }

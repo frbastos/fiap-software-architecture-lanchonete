@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 public record OrderPersistence(
-        UUID customerId,
+        //UUID customerId,
         List<OrderItemPersistence> items
 ) {
 }

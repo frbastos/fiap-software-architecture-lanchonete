@@ -11,7 +11,7 @@ public class OrderMapper {
     public static Order toDomain(OrderEntity orderEntity) {
         return new Order(
                 orderEntity.getId(),
-                orderEntity.getCustomerId(),
+                //orderEntity.getCustomerId(),
                 orderEntity.getItems().stream().map(OrderItemMapper::toDomain).toList(),
                 orderEntity.getState(),
                 orderEntity.getTotalPrice()
@@ -21,7 +21,7 @@ public class OrderMapper {
     public static OrderEntity toPersistence(Order order) {
         OrderEntity orderEntity = new OrderEntity(
                 order.getId(),
-                order.getCustomerId(),
+                //order.getCustomerId(),
                 null,
                 order.getState(),
                 order.getTotalPrice()
