@@ -26,10 +26,12 @@ public class Payment {
         this.id = id;
         this.price = price;
         this.time = time;
+        this.idOrder = idOrder;
     }
 
     public Payment(PaymentPersistence persistence) {
         this.price = persistence.price();
+        this.idOrder = persistence.idOrder();
     }
 
     public UUID getId() {return id;}

@@ -23,8 +23,9 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @ManyToOne(targetEntity = CustomerEntity.class)
-    private UUID customerId;
+
+   /* @ManyToOne(targetEntity = CustomerEntity.class)
+    private UUID customerId;*/
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItemEntity> items;

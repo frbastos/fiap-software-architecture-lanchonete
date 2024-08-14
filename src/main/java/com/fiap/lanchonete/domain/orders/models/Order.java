@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Order {
 
     private final UUID id;
-    private final UUID customerId;
+    //private final UUID customerId;
     private final List<OrderItem> items;
     private OrderState state;
     private final BigDecimal totalPrice;
@@ -16,9 +16,9 @@ public class Order {
         return id;
     }
 
-    public UUID getCustomerId() {
+    /*public UUID getCustomerId() {
         return customerId;
-    }
+    }*/
 
     public List<OrderItem> getItems() {
         return items;
@@ -34,13 +34,13 @@ public class Order {
 
     public Order(
             UUID id,
-            UUID customerId,
+            //UUID customerId,
             List<OrderItem> items,
             OrderState state,
             BigDecimal totalPrice
     ) {
         this.id = id;
-        this.customerId = customerId;
+        //this.customerId = customerId;
         this.items = items;
         this.state = state;
         this.totalPrice = totalPrice;
@@ -50,7 +50,7 @@ public class Order {
         List<OrderItem> items = persistence.items().stream().map(OrderItem::new).toList();
 
         this.id = UUID.randomUUID();
-        this.customerId = persistence.customerId();
+        //this.customerId = persistence.customerId();
         this.items = items;
         this.state = OrderState.RECEIVED;
         this.totalPrice = items.stream().map(OrderItem::getTotalPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
