@@ -4,24 +4,25 @@ import com.fiap.lanchonete.domain.orders.models.OrderState;
 import com.fiap.lanchonete.infrastructure.adapters.customers.entity.CustomerEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class OrderEntity {
 
-    @Id
-    private UUID id;
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     @ManyToOne(targetEntity = CustomerEntity.class)
     private UUID customerId;
 
@@ -33,5 +34,6 @@ public class OrderEntity {
 
     @DecimalMin("0.00")
     private BigDecimal totalPrice;
+
 
 }

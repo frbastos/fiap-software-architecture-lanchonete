@@ -25,13 +25,17 @@ public class PaymentEntity {
     @NotNull
     private LocalDateTime time;
 
+    @NotNull
+    private UUID idOder;
+
     public PaymentEntity(Payment payment) {
         this.id = payment.getId();
         this.time = payment.getTime();
         this.price = payment.getPrice();
+        this.idOder = payment.getIdOrder();
     }
 
-    public Payment toPayment() { return new Payment(this.id,this.price, this.time);
+    public Payment toPayment() { return new Payment(this.id,this.price, this.time,this.idOder);
     }
 
     @PrePersist
