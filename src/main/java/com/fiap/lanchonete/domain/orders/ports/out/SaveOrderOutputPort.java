@@ -4,6 +4,8 @@ import com.fiap.lanchonete.domain.orders.models.Order;
 
 public interface SaveOrderOutputPort {
 
-    void save(Order order);
+    Order save(Order order);
+
+    Order saveAndFlush(Order order);
 
 }

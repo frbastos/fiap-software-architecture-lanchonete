@@ -1,15 +1,30 @@
 package com.fiap.lanchonete.infrastructure.adapters.orders.mappers;
 
-import com.fiap.lanchonete.domain.orders.models.OrderItem;
-import com.fiap.lanchonete.infrastructure.adapters.orders.entity.OrderEntity;
-import com.fiap.lanchonete.infrastructure.adapters.orders.entity.OrderItemEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.fiap.lanchonete.domain.orders.models.OrderItem;
+import com.fiap.lanchonete.domain.products.models.Product;
+import com.fiap.lanchonete.infrastructure.adapters.orders.entity.OrderItemEntity;
+import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
+import com.fiap.lanchonete.infrastructure.adapters.products.mappers.ProductMapper;
+
+@Component
 public class OrderItemMapper {
 
-    public static OrderItem toDomain(OrderItemEntity orderItemEntity) {
+    @Autowired
+    private ProductMapper productMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
+
+    public OrderItem toOrderItem(OrderItemEntity orderItemEntity) {
+
+        Product product = productMapper.toProduct(orderItemEntity.getProduct());
+
         return new OrderItem(
                 orderItemEntity.getId(),
-                orderItemEntity.getProductId(),
+                product,
                 orderItemEntity.getUnitPrice(),
                 orderItemEntity.getQuantity(),
                 orderItemEntity.getObservation(),
@@ -17,15 +32,18 @@ public class OrderItemMapper {
         );
     }
 
-    public static OrderItemEntity toPersistence(OrderItem orderItem, OrderEntity order) {
+    public OrderItemEntity toOrderItemEntity(OrderItem orderItem) {
+
+        ProductEntity product = productMapper.toProductEntity(orderItem.getProduct());
+
         return new OrderItemEntity(
                 orderItem.getId(),
-                orderItem.getProductId(),
+                product,
                 orderItem.getUnitPrice(),
                 orderItem.getQuantity(),
                 orderItem.getObservation(),
                 orderItem.getTotalPrice(),
-                order
+                null
         );
     }
 

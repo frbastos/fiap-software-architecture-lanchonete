@@ -47,8 +47,4 @@ public class ProductEntity {
         this.price = product.getPrice();
         this.category = product.getCategory();
     }
-
-    public Product toProduct() {
-        return new Product(this.id, this.description, this.price, this.category);
-    }
 }

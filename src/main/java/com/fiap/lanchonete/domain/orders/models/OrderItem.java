@@ -3,21 +3,23 @@ package com.fiap.lanchonete.domain.orders.models;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import com.fiap.lanchonete.domain.products.models.Product;
+
 public class OrderItem {
 
-    private final UUID id;
-    private final UUID productId;
-    private final BigDecimal unitPrice;
-    private final int quantity;
-    private final String observation;
-    private final BigDecimal totalPrice;
+    private UUID id;
+    private Product product;
+    private BigDecimal unitPrice;
+    private int quantity;
+    private String observation;
+    private BigDecimal totalPrice;
 
     public UUID getId() {
         return id;
     }
 
-    public UUID getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
     public BigDecimal getUnitPrice() {
@@ -36,28 +38,31 @@ public class OrderItem {
         return totalPrice;
     }
 
+    
+
     public OrderItem(
-            UUID id,
-            UUID productId,
-            BigDecimal unitPrice,
-            int quantity,
+            UUID id, 
+            Product product, 
+            BigDecimal unitPrice, 
+            int quantity, 
             String observation,
-            BigDecimal totalPrice
-    ) {
+            BigDecimal totalPrice) {
         this.id = id;
-        this.productId = productId;
+        this.product = product;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
         this.observation = observation;
         this.totalPrice = totalPrice;
     }
 
-    public OrderItem(OrderItemPersistence persistence) {
-        this.id = UUID.randomUUID();
-        this.productId = persistence.productId();
-        this.unitPrice = persistence.price();
-        this.quantity = persistence.quantity();
-        this.observation = persistence.observation();
-        this.totalPrice = persistence.price().multiply(BigDecimal.valueOf(persistence.quantity()));
+    public OrderItem(
+            UUID id,
+            Product product,
+            int quantity,
+            String observation
+    ) {
+        this(id, product, product.getPrice(), quantity, observation, BigDecimal.ZERO); 
+        this.totalPrice = unitPrice.multiply(BigDecimal.valueOf(quantity));      
     }
+
 }
