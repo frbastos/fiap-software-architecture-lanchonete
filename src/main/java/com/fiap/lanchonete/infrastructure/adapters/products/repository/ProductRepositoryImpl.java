@@ -15,6 +15,7 @@ import com.fiap.lanchonete.domain.products.ports.out.GetProductsByCategoryOutput
 import com.fiap.lanchonete.domain.products.ports.out.RemoveProductOutputPort;
 import com.fiap.lanchonete.domain.products.ports.out.SaveProductOutputPort;
 import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
+import com.fiap.lanchonete.infrastructure.adapters.products.mappers.ProductMapper;
 
 @Component
 public class ProductRepositoryImpl implements GetAllProductsOutputPort, GetProductByIdOutputPort,
@@ -23,11 +24,14 @@ public class ProductRepositoryImpl implements GetAllProductsOutputPort, GetProdu
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ProductMapper productMapper;
+
     @Override
     public Product save(Product product) {
-        ProductEntity productEntity = new ProductEntity(product);
+        ProductEntity productEntity = productMapper.toProductEntity(product);
         productEntity = this.productRepository.save(productEntity);
-        return productEntity.toProduct();
+        return productMapper.toProduct(productEntity);
     }
 
     @Override
@@ -37,16 +41,18 @@ public class ProductRepositoryImpl implements GetAllProductsOutputPort, GetProdu
 
     @Override
     public List<Product> listAll() {
-        return this.productRepository.findAll().stream().map(ProductEntity::toProduct).toList();
+        List<ProductEntity> products = this.productRepository.findAll();
+        return productMapper.toListProduct(products);
     }
 
     @Override
     public Optional<Product> getById(UUID id) {
-        return this.productRepository.findById(id).map(ProductEntity::toProduct);
+        return this.productRepository.findById(id).map(entity -> productMapper.toProduct(entity));
     }
 
     @Override
     public List<Product> getByCategory(Category category) {
-        return this.productRepository.findByCategory(category).stream().map(ProductEntity::toProduct).toList();
+        List<ProductEntity> byCategory = this.productRepository.findByCategory(category);
+        return productMapper.toListProduct(byCategory);
     }
 }

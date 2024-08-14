@@ -15,7 +15,7 @@ public class ErrorHandlingControllerAdvice {
 	ValidationErrorResponse notFoundException(NotFoundException e) {
 		
 		ValidationErrorResponse error = new ValidationErrorResponse();
-		error.add(new Violation());
+		error.add(new Violation(e.getMessage()));
 		
 		return error;
 	}

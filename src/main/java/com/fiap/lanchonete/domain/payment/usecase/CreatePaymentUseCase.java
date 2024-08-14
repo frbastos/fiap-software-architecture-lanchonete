@@ -15,7 +15,7 @@ public class CreatePaymentUseCase implements CreatePaymentInputPort {
 
     @Override
     public Payment createPayment(PaymentPersistence persistence) {
-        Payment payment = new Payment(persistence);
+        Payment payment = new Payment(persistence.price(), persistence.idOrder());
         return this.savePaymentOutputPort.createPayment(payment);
     }
 }
