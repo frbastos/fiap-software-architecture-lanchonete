@@ -1,4 +1,4 @@
-package com.fiap.lanchonete.domain.orders.models;
+package com.fiap.lanchonete.domain.orders.entities;
 
 import java.math.BigDecimal;
 import java.util.UUID;

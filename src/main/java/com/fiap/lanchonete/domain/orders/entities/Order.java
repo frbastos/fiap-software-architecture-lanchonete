@@ -1,10 +1,11 @@
-package com.fiap.lanchonete.domain.orders.models;
+package com.fiap.lanchonete.domain.orders.entities;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 import com.fiap.lanchonete.domain.customers.entities.Customer;
+import com.fiap.lanchonete.domain.orders.valueobjects.OrderState;
 
 public class Order {
 
