@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import com.fiap.lanchonete.application.products.usecases.commands.UpdateProductCommand;
 import com.fiap.lanchonete.domain.products.valueobjects.Category;
-import com.fiap.lanchonete.infrastructure.products.api.dto.CreateProductRequest;
 import com.fiap.lanchonete.shared.validations.NumberValidator;
 import com.fiap.lanchonete.shared.validations.StringValidator;
 
@@ -24,8 +23,8 @@ public class Product {
         this.validation();
     }
 
-    public Product(CreateProductRequest persistence) {
-        this(null, persistence.description(), persistence.price(), persistence.category());
+    public Product(String description, BigDecimal price, Category category) {
+        this(null, description, price, category);
     }
 
     private void validation() {
