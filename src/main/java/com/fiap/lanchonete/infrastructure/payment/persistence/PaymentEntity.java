@@ -1,15 +1,21 @@
-package com.fiap.lanchonete.infrastructure.adapters.payment.entity;
-
-import com.fiap.lanchonete.domain.payment.models.Payment;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package com.fiap.lanchonete.infrastructure.payment.persistence;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import com.fiap.lanchonete.domain.payment.entities.Payment;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor

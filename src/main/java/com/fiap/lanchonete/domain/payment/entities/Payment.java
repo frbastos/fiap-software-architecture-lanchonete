@@ -1,4 +1,4 @@
-package com.fiap.lanchonete.domain.payment.models;
+package com.fiap.lanchonete.domain.payment.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

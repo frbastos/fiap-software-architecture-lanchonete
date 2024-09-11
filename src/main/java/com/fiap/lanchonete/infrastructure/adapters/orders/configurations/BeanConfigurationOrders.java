@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fiap.lanchonete.application.customers.gateways.FindCustomerOutputPort;
+import com.fiap.lanchonete.application.payment.usecases.CreatePaymentUseCase;
 import com.fiap.lanchonete.application.products.gateways.GetProductByIdGateway;
 import com.fiap.lanchonete.domain.orders.ports.out.GetAllOrdersOutputPort;
 import com.fiap.lanchonete.domain.orders.ports.out.GetOrderByIdOutputPort;
@@ -12,7 +13,6 @@ import com.fiap.lanchonete.domain.orders.usecases.CreateOrderUseCase;
 import com.fiap.lanchonete.domain.orders.usecases.GetAllOrdersUseCase;
 import com.fiap.lanchonete.domain.orders.usecases.GetOrderByIdUseCase;
 import com.fiap.lanchonete.domain.orders.usecases.UpdateOrderStateUseCase;
-import com.fiap.lanchonete.domain.payment.ports.in.CreatePaymentInputPort;
 
 @Configuration
 public class BeanConfigurationOrders {
@@ -20,7 +20,7 @@ public class BeanConfigurationOrders {
     @Bean
     public CreateOrderUseCase createOrderUseCase(
             SaveOrderOutputPort ordersRepository,
-            CreatePaymentInputPort createPaymentInputPort,
+            CreatePaymentUseCase createPaymentInputPort,
             GetProductByIdGateway getProductByIdOutputPort,
             FindCustomerOutputPort findCustomerOutputPort
     ) {

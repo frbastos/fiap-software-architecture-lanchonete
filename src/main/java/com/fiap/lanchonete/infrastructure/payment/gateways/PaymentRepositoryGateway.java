@@ -1,13 +1,15 @@
-package com.fiap.lanchonete.infrastructure.adapters.payment.repository;
+package com.fiap.lanchonete.infrastructure.payment.gateways;
 
-import com.fiap.lanchonete.domain.payment.models.Payment;
-import com.fiap.lanchonete.domain.payment.ports.out.CreatePaymentOutputPort;
-import com.fiap.lanchonete.infrastructure.adapters.payment.entity.PaymentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fiap.lanchonete.application.payment.gateways.PaymentGateway;
+import com.fiap.lanchonete.domain.payment.entities.Payment;
+import com.fiap.lanchonete.infrastructure.payment.persistence.PaymentEntity;
+import com.fiap.lanchonete.infrastructure.payment.persistence.PaymentRepository;
+
 @Component
-public class PaymentRepositoryImplOutput implements CreatePaymentOutputPort {
+public class PaymentRepositoryGateway implements PaymentGateway {
 
     @Autowired
     private PaymentRepository paymentRepository;
