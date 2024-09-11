@@ -1,8 +1,8 @@
-package com.fiap.lanchonete.infrastructure.adapters.customers.entity;
+package com.fiap.lanchonete.infrastructure.customers.persistence;
 
 import java.util.UUID;
 
-import com.fiap.lanchonete.domain.customers.models.Customer;
+import com.fiap.lanchonete.domain.customers.entities.Customer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -5,19 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fiap.lanchonete.domain.customers.models.Customer;
+import com.fiap.lanchonete.domain.customers.entities.Customer;
 import com.fiap.lanchonete.domain.orders.models.Order;
 import com.fiap.lanchonete.domain.orders.models.OrderItem;
-import com.fiap.lanchonete.infrastructure.adapters.customers.entity.CustomerEntity;
-import com.fiap.lanchonete.infrastructure.adapters.customers.mapper.CustomerMapper;
 import com.fiap.lanchonete.infrastructure.adapters.orders.entity.OrderEntity;
 import com.fiap.lanchonete.infrastructure.adapters.orders.entity.OrderItemEntity;
+import com.fiap.lanchonete.infrastructure.customers.gateway.CustomerEntityMapper;
+import com.fiap.lanchonete.infrastructure.customers.persistence.CustomerEntity;
 
 @Component
 public class OrderMapper {
 
     @Autowired
-    private CustomerMapper customerMapper;
+    private CustomerEntityMapper customerMapper;
 
     @Autowired
     private OrderItemMapper orderItemMapper;

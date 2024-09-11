@@ -3,8 +3,8 @@ package com.fiap.lanchonete.infrastructure.adapters.orders.configurations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.fiap.lanchonete.application.customers.gateways.FindCustomerOutputPort;
 import com.fiap.lanchonete.application.products.gateways.GetProductByIdGateway;
-import com.fiap.lanchonete.domain.customers.ports.out.FindCustomerOutputPort;
 import com.fiap.lanchonete.domain.orders.ports.out.GetAllOrdersOutputPort;
 import com.fiap.lanchonete.domain.orders.ports.out.GetOrderByIdOutputPort;
 import com.fiap.lanchonete.domain.orders.ports.out.SaveOrderOutputPort;

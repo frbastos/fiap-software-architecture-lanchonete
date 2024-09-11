@@ -2,9 +2,9 @@ package com.fiap.lanchonete.domain.orders.usecases;
 
 import java.util.List;
 
+import com.fiap.lanchonete.application.customers.gateways.FindCustomerOutputPort;
 import com.fiap.lanchonete.application.products.gateways.GetProductByIdGateway;
-import com.fiap.lanchonete.domain.customers.models.Customer;
-import com.fiap.lanchonete.domain.customers.ports.out.FindCustomerOutputPort;
+import com.fiap.lanchonete.domain.customers.entities.Customer;
 import com.fiap.lanchonete.domain.orders.models.Order;
 import com.fiap.lanchonete.domain.orders.models.OrderItem;
 import com.fiap.lanchonete.domain.orders.models.OrderItemPersistence;

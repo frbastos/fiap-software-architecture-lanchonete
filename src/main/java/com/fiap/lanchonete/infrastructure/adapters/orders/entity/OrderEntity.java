@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fiap.lanchonete.domain.orders.models.OrderState;
-import com.fiap.lanchonete.infrastructure.adapters.customers.entity.CustomerEntity;
+import com.fiap.lanchonete.infrastructure.customers.persistence.CustomerEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

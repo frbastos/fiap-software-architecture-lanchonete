@@ -1,14 +1,15 @@
-package com.fiap.lanchonete.infrastructure.adapters.customers.configuration;
+package com.fiap.lanchonete.infrastructure.customers.configuration;
 
 
-import com.fiap.lanchonete.shared.exception.NotFoundException;
-import com.fiap.lanchonete.shared.exception.ValidationErrorResponse;
-import com.fiap.lanchonete.shared.exception.Violation;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.fiap.lanchonete.shared.exception.NotFoundException;
+import com.fiap.lanchonete.shared.exception.ValidationErrorResponse;
+import com.fiap.lanchonete.shared.exception.Violation;
 
 @ControllerAdvice
 public class ErrorHandlingCustomerControllerService {

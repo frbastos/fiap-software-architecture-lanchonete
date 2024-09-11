@@ -1,6 +1,9 @@
-package com.fiap.lanchonete.domain.customers.models;
+package com.fiap.lanchonete.domain.customers.entities;
 
 import java.util.UUID;
+
+import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerRequest;
+import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerResponse;
 
 public class Customer {
 
@@ -13,7 +16,7 @@ public class Customer {
     private String mail;
 
 
-    public Customer(CustomerPersistence persistence
+    public Customer(CustomerRequest persistence
                     ){
         this.document = persistence.document();
         this.name = persistence.name();

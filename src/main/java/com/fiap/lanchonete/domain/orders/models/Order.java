@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import com.fiap.lanchonete.domain.customers.models.Customer;
+import com.fiap.lanchonete.domain.customers.entities.Customer;
 
 public class Order {
 

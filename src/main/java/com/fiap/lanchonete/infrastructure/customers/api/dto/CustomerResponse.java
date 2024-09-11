@@ -1,4 +1,4 @@
-package com.fiap.lanchonete.domain.customers.models;
+package com.fiap.lanchonete.infrastructure.customers.api.dto;
 
 import java.util.UUID;
 
