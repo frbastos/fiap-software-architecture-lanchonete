@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import com.fiap.lanchonete.application.customers.gateways.CustomerGateway;
 import com.fiap.lanchonete.application.customers.usecases.FindCustomerUseCaseImpl;
 import com.fiap.lanchonete.application.customers.usecases.RegisterCustomerUseCaseImpl;
+import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerDTOMapper;
+import com.fiap.lanchonete.infrastructure.customers.gateway.mappers.CustomerEntityMapper;
 
 @Configuration
 public class BeanConfigurationCustomer {
@@ -18,5 +20,15 @@ public class BeanConfigurationCustomer {
     @Bean
     RegisterCustomerUseCaseImpl registerCustomerUseCase(CustomerGateway customerGateway) {
         return new RegisterCustomerUseCaseImpl(customerGateway);
+    }
+
+    @Bean
+    CustomerDTOMapper customerDTOMapper(){
+        return new CustomerDTOMapper();
+    }
+
+    @Bean
+    CustomerEntityMapper customerEntityMapper(){
+        return new CustomerEntityMapper();
     }
 }

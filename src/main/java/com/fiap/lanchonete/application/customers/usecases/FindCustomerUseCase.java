@@ -2,10 +2,10 @@ package com.fiap.lanchonete.application.customers.usecases;
 
 import java.util.Optional;
 
-import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerResponse;
+import com.fiap.lanchonete.domain.customers.entities.Customer;
 
 public interface FindCustomerUseCase {
 
-    Optional<CustomerResponse> findCustomer(String document);
+    Optional<Customer> findCustomer(String document);
 
 }

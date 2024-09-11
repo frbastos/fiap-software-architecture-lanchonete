@@ -21,13 +21,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="payment")
+@Table(name = "payment")
 public class PaymentEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @NotNull
     private BigDecimal price;
+    
     @NotNull
     private LocalDateTime time;
 
@@ -41,15 +44,13 @@ public class PaymentEntity {
         this.idOder = payment.getIdOrder();
     }
 
-    public Payment toPayment() { return new Payment(this.id,this.price, this.time,this.idOder);
+    public Payment toPayment() {
+        return new Payment(this.id, this.price, this.time, this.idOder);
     }
 
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         this.time = LocalDateTime.now();
     }
-
-
-
 
 }

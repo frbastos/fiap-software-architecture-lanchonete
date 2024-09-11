@@ -1,11 +1,9 @@
 package com.fiap.lanchonete.application.customers.usecases;
 
-import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerRequest;
-import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerResponse;
+import com.fiap.lanchonete.domain.customers.entities.Customer;
 
 public interface RegisterCustomerUseCase {
 
-    CustomerResponse save(CustomerRequest customerPersistence);
-
+    Customer save(Customer customerPersistence);
 
 }

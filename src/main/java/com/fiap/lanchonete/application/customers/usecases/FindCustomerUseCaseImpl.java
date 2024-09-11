@@ -3,8 +3,7 @@ package com.fiap.lanchonete.application.customers.usecases;
 import java.util.Optional;
 
 import com.fiap.lanchonete.application.customers.gateways.CustomerGateway;
-import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerResponse;
-import com.fiap.lanchonete.shared.exception.NotFoundException;
+import com.fiap.lanchonete.domain.customers.entities.Customer;
 
 public class FindCustomerUseCaseImpl implements FindCustomerUseCase {
 
@@ -15,8 +14,8 @@ public class FindCustomerUseCaseImpl implements FindCustomerUseCase {
     }
 
     @Override
-    public Optional<CustomerResponse> findCustomer(String document) {
-        return Optional.of(customerGateway.findCustomer( document).orElseThrow(NotFoundException::new).customerToResponse());
+    public Optional<Customer> findCustomer(String document) {
+        return customerGateway.findCustomer(document);
     }
 
 }

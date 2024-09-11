@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.fiap.lanchonete.application.products.gateways.ProductGateway;
 import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.domain.products.valueobjects.Category;
+import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntityMapper;
 import com.fiap.lanchonete.infrastructure.products.persistence.ProductEntity;
 import com.fiap.lanchonete.infrastructure.products.persistence.ProductRepository;
 
