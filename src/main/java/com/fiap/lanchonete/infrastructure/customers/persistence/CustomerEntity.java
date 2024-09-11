@@ -43,6 +43,4 @@ public class CustomerEntity {
         this.mail = customer.getMail();
     }
 
-    public Customer toCustomer(){return new Customer(this.id, this.name, this.document, this.mail);}
-
 }

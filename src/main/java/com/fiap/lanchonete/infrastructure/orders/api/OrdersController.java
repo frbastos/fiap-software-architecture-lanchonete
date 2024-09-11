@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +22,7 @@ import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderRequest;
 
 @RestController
 @RequestMapping("/orders")
-public class OrdersController implements OrdersApi {
+public class OrdersController {
 
     private final GetAllOrdersUseCase getAllOrdersInputPort;
     private final GetOrderByIdUseCase getOrderByIdInputPort;
@@ -37,23 +42,23 @@ public class OrdersController implements OrdersApi {
         this.createOrderInputPort = createOrderInputPort;
     }
 
-    @Override
+    @GetMapping("")
     public List<Order> getAllOrders() {
         return this.getAllOrdersInputPort.getAll();
     }
 
-    @Override
-    public Optional<Order> getOrderById(UUID id) {
+    @GetMapping("/{id}")
+    public Optional<Order> getOrderById(@PathVariable("id") UUID id) {
         return this.getOrderByIdInputPort.getOrderById(id);
     }
 
-    @Override
-    public void updateOrderState(UUID id, OrderState state) {
+    @PatchMapping("/{id}/state")
+    public void updateOrderState(@PathVariable("id") UUID id, @RequestBody OrderState state) {
         this.updateOrderStateInputPort.updateState(id, state);
     }
 
-    @Override
-    public void createOrder(OrderRequest order) {
+    @PostMapping("/create")
+    public void createOrder(@RequestBody OrderRequest order) {
         this.createOrderInputPort.createOrder(order);
     }
 }

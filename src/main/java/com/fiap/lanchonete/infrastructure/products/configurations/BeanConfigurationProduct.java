@@ -13,9 +13,17 @@ import com.fiap.lanchonete.application.products.usecases.RemoveProductUseCaseImp
 import com.fiap.lanchonete.application.products.usecases.UpdateProductUseCaseImpl;
 import com.fiap.lanchonete.infrastructure.products.api.dto.ProductCommandMapper;
 import com.fiap.lanchonete.infrastructure.products.api.dto.ProductDTOMapper;
+import com.fiap.lanchonete.infrastructure.products.gateways.ProductRepositoryGateway;
+import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntityMapper;
+import com.fiap.lanchonete.infrastructure.products.persistence.ProductRepository;
 
 @Configuration
 public class BeanConfigurationProduct {
+
+    @Bean
+    ProductGateway productGateway(ProductRepository productRepository, ProductEntityMapper productEntityMapper) {
+        return new ProductRepositoryGateway(productRepository, productEntityMapper);
+    }
 
     @Bean
     CreateProductUseCase createProductUseCase(ProductGateway productGateway) {
@@ -48,12 +56,17 @@ public class BeanConfigurationProduct {
     }
 
     @Bean
-    ProductDTOMapper productDTOMapper(){
+    ProductDTOMapper productDTOMapper() {
         return new ProductDTOMapper();
     }
 
     @Bean
-    ProductCommandMapper productCommandMapper(){
+    ProductEntityMapper productEntityMapper() {
+        return new ProductEntityMapper();
+    }
+
+    @Bean
+    ProductCommandMapper productCommandMapper() {
         return new ProductCommandMapper();
     }
 

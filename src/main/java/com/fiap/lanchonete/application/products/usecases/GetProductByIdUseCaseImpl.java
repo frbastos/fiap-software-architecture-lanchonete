@@ -17,7 +17,7 @@ public class GetProductByIdUseCaseImpl implements GetProductByIdUseCase {
 
     @Override
     public Optional<Product> getById(UUID id) throws NotFoundException {
-        return Optional.of(this.productGateway.getById(id).orElseThrow(NotFoundException::new));
+        return this.productGateway.getById(id);
     }
 
 }

@@ -1,11 +1,8 @@
 package com.fiap.lanchonete.infrastructure.customers.gateway.mappers;
 
-import org.springframework.stereotype.Component;
-
 import com.fiap.lanchonete.domain.customers.entities.Customer;
 import com.fiap.lanchonete.infrastructure.customers.persistence.CustomerEntity;
 
-@Component
 public class CustomerEntityMapper {
 
     public Customer toCustomer(CustomerEntity entity) {

@@ -2,12 +2,9 @@ package com.fiap.lanchonete.infrastructure.products.gateways.mappers;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.infrastructure.products.persistence.ProductEntity;
 
-@Component
 public class ProductEntityMapper {
 
     public ProductEntity toProductEntity(Product product) {

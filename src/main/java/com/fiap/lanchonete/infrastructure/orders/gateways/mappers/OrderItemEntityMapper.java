@@ -1,14 +1,11 @@
 package com.fiap.lanchonete.infrastructure.orders.gateways.mappers;
 
-import org.springframework.stereotype.Component;
-
 import com.fiap.lanchonete.domain.orders.entities.OrderItem;
 import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.infrastructure.orders.persistence.OrderItemEntity;
 import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntityMapper;
 import com.fiap.lanchonete.infrastructure.products.persistence.ProductEntity;
 
-@Component
 public class OrderItemEntityMapper {
 
     private final ProductEntityMapper productMapper;

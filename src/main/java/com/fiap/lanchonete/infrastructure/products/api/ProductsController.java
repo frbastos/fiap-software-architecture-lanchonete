@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.lanchonete.application.products.gateways.ProductGateway;
@@ -24,7 +30,7 @@ import com.fiap.lanchonete.infrastructure.products.api.dto.UpdateProductRequest;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
 
 @RestController
-public class ProductsController implements ProdutApi {
+public class ProductsController {
 
     private final ProductDTOMapper productDTOMapper;
     private final ProductCommandMapper productCommandMapper;
@@ -36,15 +42,15 @@ public class ProductsController implements ProdutApi {
     private final RemoveProductUseCase removeProductUseCase;
 
     public ProductsController(
-        ProductGateway productGateway,
-        ProductDTOMapper productDTOMapper,
-        ProductCommandMapper productCommandMapper,
-        CreateProductUseCase createProductUseCase,
-        UpdateProductUseCase updateProductUseCase,
-        GetProductByIdUseCase getProductByIdUseCase,
-        GetProductsByCategoryUseCase getProductsByCategoryUseCase,
-        GetAllProductsUseCase getAllProductsUseCase,
-        RemoveProductUseCase removeProductUseCase){
+            ProductGateway productGateway,
+            ProductDTOMapper productDTOMapper,
+            ProductCommandMapper productCommandMapper,
+            CreateProductUseCase createProductUseCase,
+            UpdateProductUseCase updateProductUseCase,
+            GetProductByIdUseCase getProductByIdUseCase,
+            GetProductsByCategoryUseCase getProductsByCategoryUseCase,
+            GetAllProductsUseCase getAllProductsUseCase,
+            RemoveProductUseCase removeProductUseCase) {
 
         this.productDTOMapper = productDTOMapper;
         this.productCommandMapper = productCommandMapper;
@@ -56,35 +62,39 @@ public class ProductsController implements ProdutApi {
         this.removeProductUseCase = removeProductUseCase;
     }
 
-    @Override
-    public ProductResponse createProduct(CreateProductRequest request) {
+    @PostMapping("")
+    public ProductResponse createProduct(@RequestBody CreateProductRequest request) {
         Product productObjDomain = productDTOMapper.toProduct(request);
         Product product = createProductUseCase.createProduct(productObjDomain);
         return productDTOMapper.toResponse(product);
     }
 
-    @Override
-    public ProductResponse updateProduct(UUID id, UpdateProductRequest update) {
+    @PutMapping("/{id}")
+    public ProductResponse updateProduct(@PathVariable("id") UUID id, @RequestBody UpdateProductRequest update) {
         UpdateProductCommand updateCommand = productCommandMapper.toUpdateCommand(id, update);
         Product product = updateProductUseCase.update(updateCommand);
         return productDTOMapper.toResponse(product);
     }
 
-    @Override
-    public Product getProductById(UUID id) {
-        return this.getProductByIdUseCase.getById(id).orElseThrow(NotFoundException::new);
+    @GetMapping("/{id}")
+    public ProductResponse getProductById(@PathVariable("id") UUID id) {
+        Product product = this.getProductByIdUseCase.getById(id).orElseThrow(NotFoundException::new);
+        return productDTOMapper.toResponse(product);
     }
 
-    @Override
-    public List<Product> getAllProducts(Category category) {
+    @GetMapping("")
+    public List<ProductResponse> getAllProducts(Category category) {
+        List<Product> products;
         if (category != null) {
-            return getProductsByCategoryUseCase.getByCategory(category);
+            products = getProductsByCategoryUseCase.getByCategory(category);
+        }else{
+            products = getAllProductsUseCase.getAll();
         }
-        return getAllProductsUseCase.getAll();
+        return products.stream().map(p -> productDTOMapper.toResponse(p)).toList();
     }
 
-    @Override
-    public ResponseEntity<?> removeProduct(UUID id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removeProduct(@PathVariable("id") UUID id) {
         removeProductUseCase.remove(id);
         return ResponseEntity.ok().build();
     }

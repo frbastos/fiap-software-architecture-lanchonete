@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.stereotype.Component;
-
 import com.fiap.lanchonete.application.products.gateways.ProductGateway;
 import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.domain.products.valueobjects.Category;
@@ -13,13 +11,12 @@ import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntit
 import com.fiap.lanchonete.infrastructure.products.persistence.ProductEntity;
 import com.fiap.lanchonete.infrastructure.products.persistence.ProductRepository;
 
-@Component
 public class ProductRepositoryGateway implements ProductGateway {
 
     private final ProductRepository productRepository;
     private final ProductEntityMapper productEntityMapper;
 
-    ProductRepositoryGateway(
+    public ProductRepositoryGateway(
             ProductRepository productRepository,
             ProductEntityMapper productEntityMapper) {
 

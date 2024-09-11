@@ -11,12 +11,23 @@ import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCaseImpl;
 import com.fiap.lanchonete.application.orders.usecases.UpdateOrderStateUseCaseImpl;
 import com.fiap.lanchonete.application.payment.usecases.CreatePaymentUseCase;
 import com.fiap.lanchonete.application.products.usecases.GetProductByIdUseCase;
+import com.fiap.lanchonete.infrastructure.customers.gateway.mappers.CustomerEntityMapper;
+import com.fiap.lanchonete.infrastructure.orders.gateways.OrdersRepositoryGateways;
+import com.fiap.lanchonete.infrastructure.orders.gateways.mappers.OrderEntityMapper;
+import com.fiap.lanchonete.infrastructure.orders.gateways.mappers.OrderItemEntityMapper;
+import com.fiap.lanchonete.infrastructure.orders.persistence.OrdersRepository;
+import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntityMapper;
 
 @Configuration
 public class BeanConfigurationOrders {
 
     @Bean
-    public CreateOrderUseCaseImpl createOrderUseCase(
+    OrderGateway orderGateway(OrdersRepository ordersRepository, OrderEntityMapper orderEntityMapper){
+        return new OrdersRepositoryGateways(ordersRepository, orderEntityMapper);
+    }
+
+    @Bean
+    CreateOrderUseCaseImpl createOrderUseCase(
             OrderGateway orderGateway,
             CreatePaymentUseCase createPaymentUseCase,
             GetProductByIdUseCase getProductByIdUseCase,
@@ -26,21 +37,31 @@ public class BeanConfigurationOrders {
     }
 
     @Bean
-    public GetAllOrdersUseCaseImpl getAllOrdersUseCase(
+    GetAllOrdersUseCaseImpl getAllOrdersUseCase(
             OrderGateway orderGateway) {
         return new GetAllOrdersUseCaseImpl(orderGateway);
     }
 
     @Bean
-    public GetOrderByIdUseCaseImpl getOrderByIdUseCase(
+    GetOrderByIdUseCaseImpl getOrderByIdUseCase(
             OrderGateway orderGateway) {
         return new GetOrderByIdUseCaseImpl(orderGateway);
     }
 
     @Bean
-    public UpdateOrderStateUseCaseImpl updateOrderStateUseCase(
+    UpdateOrderStateUseCaseImpl updateOrderStateUseCase(
             OrderGateway orderGateway) {
         return new UpdateOrderStateUseCaseImpl(orderGateway);
+    }
+
+    @Bean
+    OrderEntityMapper orderEntityMapper(CustomerEntityMapper customerEntityMapper, OrderItemEntityMapper orderItemEntityMapper){
+        return new OrderEntityMapper(customerEntityMapper, orderItemEntityMapper);
+    }
+
+    @Bean
+    OrderItemEntityMapper orderItemEntityMapper(ProductEntityMapper productEntityMapper){
+        return new OrderItemEntityMapper(productEntityMapper);
     }
 
 }
