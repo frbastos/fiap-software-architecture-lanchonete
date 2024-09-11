@@ -3,7 +3,7 @@ package com.fiap.lanchonete.domain.orders.models;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import com.fiap.lanchonete.domain.products.models.Product;
+import com.fiap.lanchonete.domain.products.entities.Product;
 
 public class OrderItem {
 

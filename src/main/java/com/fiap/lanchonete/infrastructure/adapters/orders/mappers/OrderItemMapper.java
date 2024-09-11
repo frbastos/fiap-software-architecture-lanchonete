@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fiap.lanchonete.domain.orders.models.OrderItem;
-import com.fiap.lanchonete.domain.products.models.Product;
+import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.infrastructure.adapters.orders.entity.OrderItemEntity;
-import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
-import com.fiap.lanchonete.infrastructure.adapters.products.mappers.ProductMapper;
+import com.fiap.lanchonete.infrastructure.products.gateways.ProductEntityMapper;
+import com.fiap.lanchonete.infrastructure.products.persistence.ProductEntity;
 
 @Component
 public class OrderItemMapper {
 
     @Autowired
-    private ProductMapper productMapper;
+    private ProductEntityMapper productMapper;
 
     @Autowired
     private OrderMapper orderMapper;

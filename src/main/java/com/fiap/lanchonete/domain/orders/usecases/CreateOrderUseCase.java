@@ -2,6 +2,7 @@ package com.fiap.lanchonete.domain.orders.usecases;
 
 import java.util.List;
 
+import com.fiap.lanchonete.application.products.gateways.GetProductByIdGateway;
 import com.fiap.lanchonete.domain.customers.models.Customer;
 import com.fiap.lanchonete.domain.customers.ports.out.FindCustomerOutputPort;
 import com.fiap.lanchonete.domain.orders.models.Order;
@@ -12,8 +13,7 @@ import com.fiap.lanchonete.domain.orders.ports.in.CreateOrderInputPort;
 import com.fiap.lanchonete.domain.orders.ports.out.SaveOrderOutputPort;
 import com.fiap.lanchonete.domain.payment.models.PaymentPersistence;
 import com.fiap.lanchonete.domain.payment.ports.in.CreatePaymentInputPort;
-import com.fiap.lanchonete.domain.products.models.Product;
-import com.fiap.lanchonete.domain.products.ports.out.GetProductByIdOutputPort;
+import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
 import com.fiap.lanchonete.shared.validations.StringValidator;
 
@@ -21,13 +21,13 @@ public class CreateOrderUseCase implements CreateOrderInputPort {
 
     private final SaveOrderOutputPort ordersRepository;
     private final CreatePaymentInputPort createPaymentInputPort;
-    private final GetProductByIdOutputPort getProductByIdOutputPort;
+    private final GetProductByIdGateway getProductByIdOutputPort;
     private final FindCustomerOutputPort findCustomerOutputPort;
 
     public CreateOrderUseCase(
             SaveOrderOutputPort ordersRepository, 
             CreatePaymentInputPort createPaymentInputPort,
-            GetProductByIdOutputPort getProductByIdOutputPort,
+            GetProductByIdGateway getProductByIdOutputPort,
             FindCustomerOutputPort findCustomerOutputPort) {
         this.ordersRepository = ordersRepository;
         this.createPaymentInputPort = createPaymentInputPort;

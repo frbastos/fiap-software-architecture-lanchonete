@@ -3,7 +3,7 @@ package com.fiap.lanchonete.infrastructure.adapters.orders.entity;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-import com.fiap.lanchonete.infrastructure.adapters.products.entity.ProductEntity;
+import com.fiap.lanchonete.infrastructure.products.persistence.ProductEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

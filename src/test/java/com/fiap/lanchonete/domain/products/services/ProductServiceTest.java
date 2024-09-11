@@ -17,21 +17,21 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.fiap.lanchonete.domain.products.models.Category;
-import com.fiap.lanchonete.domain.products.models.Product;
-import com.fiap.lanchonete.domain.products.models.ProductPersistence;
-import com.fiap.lanchonete.domain.products.models.ProductUpdate;
-import com.fiap.lanchonete.domain.products.ports.out.GetAllProductsOutputPort;
-import com.fiap.lanchonete.domain.products.ports.out.GetProductByIdOutputPort;
-import com.fiap.lanchonete.domain.products.ports.out.GetProductsByCategoryOutputPort;
-import com.fiap.lanchonete.domain.products.ports.out.RemoveProductOutputPort;
-import com.fiap.lanchonete.domain.products.ports.out.SaveProductOutputPort;
-import com.fiap.lanchonete.domain.products.usecase.CreateProductUseCase;
-import com.fiap.lanchonete.domain.products.usecase.GetAllProductsUseCase;
-import com.fiap.lanchonete.domain.products.usecase.GetProductByIdUseCase;
-import com.fiap.lanchonete.domain.products.usecase.GetProductsByCategoryUseCase;
-import com.fiap.lanchonete.domain.products.usecase.RemoveProductUseCase;
-import com.fiap.lanchonete.domain.products.usecase.UpdateProductUseCase;
+import com.fiap.lanchonete.application.products.gateways.GetAllProductsGateway;
+import com.fiap.lanchonete.application.products.gateways.GetProductByIdGateway;
+import com.fiap.lanchonete.application.products.gateways.GetProductsByCategoryGateway;
+import com.fiap.lanchonete.application.products.gateways.RemoveProductOutputPort;
+import com.fiap.lanchonete.application.products.gateways.SaveProductOutputPort;
+import com.fiap.lanchonete.application.products.usecases.CreateProductUseCase;
+import com.fiap.lanchonete.application.products.usecases.GetAllProductsUseCaseImpl;
+import com.fiap.lanchonete.application.products.usecases.GetProductByIdUseCaseImpl;
+import com.fiap.lanchonete.application.products.usecases.GetProductsByCategoryUseCaseImpl;
+import com.fiap.lanchonete.application.products.usecases.RemoveProductUseCaseImpl;
+import com.fiap.lanchonete.application.products.usecases.UpdateProductUseCaseImpl;
+import com.fiap.lanchonete.domain.products.entities.Product;
+import com.fiap.lanchonete.domain.products.valueobjects.Category;
+import com.fiap.lanchonete.infrastructure.products.api.dto.CreateProductRequest;
+import com.fiap.lanchonete.infrastructure.products.api.dto.UpdateProductRequest;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,31 +44,31 @@ public class ProductServiceTest {
     private SaveProductOutputPort saveProductOutputPort;
 
     @InjectMocks
-    private GetAllProductsUseCase getAllProductsUseCase;
+    private GetAllProductsUseCaseImpl getAllProductsUseCase;
 
     @Mock
-    private GetAllProductsOutputPort getAllProductsOutputPort;
+    private GetAllProductsGateway getAllProductsOutputPort;
 
     @InjectMocks
-    private GetProductByIdUseCase getProductByIdUseCase;
+    private GetProductByIdUseCaseImpl getProductByIdUseCase;
 
     @Mock
-    private GetProductByIdOutputPort getProductByIdOutputPort;
+    private GetProductByIdGateway getProductByIdOutputPort;
 
     @InjectMocks
-    private GetProductsByCategoryUseCase getProductsByCategoryUseCase;
+    private GetProductsByCategoryUseCaseImpl getProductsByCategoryUseCase;
 
     @Mock
-    private GetProductsByCategoryOutputPort getProductsByCategoryOutputPort;
+    private GetProductsByCategoryGateway getProductsByCategoryOutputPort;
 
     @InjectMocks
-    private RemoveProductUseCase removeProductUseCase;
+    private RemoveProductUseCaseImpl removeProductUseCase;
 
     @Mock
     private RemoveProductOutputPort removeProductOutputPort;
 
     @InjectMocks
-    private UpdateProductUseCase updateProductUseCase;
+    private UpdateProductUseCaseImpl updateProductUseCase;
 
     @Captor
     private ArgumentCaptor<Product> productCaptor;
@@ -80,7 +80,7 @@ public class ProductServiceTest {
     void shouldCallMethodSave(){
         
         // ARRANGE
-        ProductPersistence productPersistence = new ProductPersistence("X-Salda", new BigDecimal(25.50), Category.SNACK);
+        CreateProductRequest productPersistence = new CreateProductRequest("X-Salda", new BigDecimal(25.50), Category.SNACK);
 
         // ACT
         this.createProductUseCase.createProduct(productPersistence);
@@ -99,7 +99,7 @@ public class ProductServiceTest {
     void shouldCallMethodUpdateFromProduct(){
         
         // ARRANGE
-        ProductUpdate productUpdate = new ProductUpdate("X-Salda", new BigDecimal(25.50), Category.SNACK);
+        UpdateProductRequest productUpdate = new UpdateProductRequest("X-Salda", new BigDecimal(25.50), Category.SNACK);
         UUID productId = UUID.randomUUID();
         given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.of(product));
 
@@ -118,7 +118,7 @@ public class ProductServiceTest {
     void shouldCallMethodUpdate(){
         
         // ARRANGE
-        ProductUpdate productUpdate = new ProductUpdate("X-Salda", new BigDecimal(25.50), Category.SNACK);
+        UpdateProductRequest productUpdate = new UpdateProductRequest("X-Salda", new BigDecimal(25.50), Category.SNACK);
         UUID productId = UUID.randomUUID();
         given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.of(product));
 
@@ -139,7 +139,7 @@ public class ProductServiceTest {
     void shouldThrowNotFoundWhenCallMethodUpdate(){
         
         // ARRANGE
-        ProductUpdate productUpdate = new ProductUpdate("X-Salda", new BigDecimal(25.50), Category.SNACK);
+        UpdateProductRequest productUpdate = new UpdateProductRequest("X-Salda", new BigDecimal(25.50), Category.SNACK);
         UUID productId = UUID.randomUUID();
         given(getProductByIdOutputPort.getById(productId)).willReturn(Optional.empty());
 

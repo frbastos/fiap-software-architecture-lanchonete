@@ -8,9 +8,9 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.domain.products.models.Category;
-import com.fiap.lanchonete.domain.products.models.Product;
-import com.fiap.lanchonete.domain.products.models.ProductUpdate;
+import com.fiap.lanchonete.domain.products.entities.Product;
+import com.fiap.lanchonete.domain.products.valueobjects.Category;
+import com.fiap.lanchonete.infrastructure.products.api.dto.UpdateProductRequest;
 
 public class ProductTest {
 
@@ -61,7 +61,7 @@ public class ProductTest {
     void shouldUpdateProduct(){
 
         Product product = new Product(null, "X-Salad", new BigDecimal(25.5), Category.SNACK);
-        ProductUpdate productUpdate = new ProductUpdate("X-Bacon", new BigDecimal(45.50), Category.SNACK);
+        UpdateProductRequest productUpdate = new UpdateProductRequest("X-Bacon", new BigDecimal(45.50), Category.SNACK);
         
         product.update(productUpdate);
 
