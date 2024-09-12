@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.lanchonete.application.products.gateways.ProductGateway;
@@ -30,6 +32,7 @@ import com.fiap.lanchonete.infrastructure.products.api.dto.UpdateProductRequest;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
 
 @RestController
+@RequestMapping("/products")
 public class ProductsController {
 
     private final ProductDTOMapper productDTOMapper;
@@ -83,7 +86,7 @@ public class ProductsController {
     }
 
     @GetMapping("")
-    public List<ProductResponse> getAllProducts(Category category) {
+    public List<ProductResponse> getAllProducts(@RequestParam(value = "category", required = false) Category category) {
         List<Product> products;
         if (category != null) {
             products = getProductsByCategoryUseCase.getByCategory(category);

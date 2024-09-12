@@ -16,7 +16,6 @@ public class PaymentRepositoryGateway implements PaymentGateway {
         this.paymentEntityMapper = paymentEntityMapper;
     }
 
-    @Override
     public Payment createPayment(Payment payment) {
         PaymentEntity entity = this.paymentRepository.save(paymentEntityMapper.toEntity(payment));
         return paymentEntityMapper.toPayment(entity);

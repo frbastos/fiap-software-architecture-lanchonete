@@ -12,7 +12,7 @@ import com.fiap.lanchonete.domain.payment.entities.PaymentPersistence;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/payments")
 public class PaymentControler {
 
     private final CreatePaymentUseCase createPaymentUseCase;

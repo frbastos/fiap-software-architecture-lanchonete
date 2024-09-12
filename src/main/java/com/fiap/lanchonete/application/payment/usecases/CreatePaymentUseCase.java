@@ -5,6 +5,6 @@ import com.fiap.lanchonete.domain.payment.entities.PaymentPersistence;
 
 public interface CreatePaymentUseCase {
 
-    Payment createPayment(PaymentPersistence payment);
+    Payment createPayment(PaymentPersistence persistence);
 
 }
