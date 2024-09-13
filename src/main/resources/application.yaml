@@ -8,6 +8,11 @@ spring:
     allow-circular-references: true
   application:
     name: lanchonete
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
 
 # OpenAPI
 springdoc:

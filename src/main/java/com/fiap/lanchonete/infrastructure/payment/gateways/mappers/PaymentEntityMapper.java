@@ -6,11 +6,11 @@ import com.fiap.lanchonete.infrastructure.payment.persistence.PaymentEntity;
 public class PaymentEntityMapper {
 
     public Payment toPayment(PaymentEntity entity){
-        return new Payment(entity.getId(), entity.getPrice(), entity.getTime(), entity.getIdOder());
+        return new Payment(entity.getId(), entity.getTime(), entity.getAmount(), entity.getTransactionId(), entity.getStatus());
     }
 
     public PaymentEntity toEntity(Payment payment){
-        return new PaymentEntity(payment.getId(), payment.getPrice(), payment.getTime(), payment.getIdOrder());
+        return new PaymentEntity(payment.id(), payment.time(), payment.amount(), payment.transactionId(), payment.status());
     }
 
 }

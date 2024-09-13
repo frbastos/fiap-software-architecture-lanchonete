@@ -7,15 +7,22 @@ import com.fiap.lanchonete.application.customers.usecases.FindCustomerUseCase;
 import com.fiap.lanchonete.application.orders.gateways.OrderGateway;
 import com.fiap.lanchonete.application.orders.usecases.CreateOrderUseCaseImpl;
 import com.fiap.lanchonete.application.orders.usecases.GetAllOrdersUseCaseImpl;
+import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCase;
 import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCaseImpl;
+import com.fiap.lanchonete.application.orders.usecases.OrderPaymentProcessorUseCase;
+import com.fiap.lanchonete.application.orders.usecases.OrderPaymentProcessorUseCaseImpl;
 import com.fiap.lanchonete.application.orders.usecases.UpdateOrderStateUseCaseImpl;
 import com.fiap.lanchonete.application.payment.usecases.CreatePaymentUseCase;
 import com.fiap.lanchonete.application.products.usecases.GetProductByIdUseCase;
+import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerDTOMapper;
 import com.fiap.lanchonete.infrastructure.customers.gateway.mappers.CustomerEntityMapper;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderCommandMapper;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderDTOMapper;
 import com.fiap.lanchonete.infrastructure.orders.gateways.OrdersRepositoryGateways;
 import com.fiap.lanchonete.infrastructure.orders.gateways.mappers.OrderEntityMapper;
 import com.fiap.lanchonete.infrastructure.orders.gateways.mappers.OrderItemEntityMapper;
 import com.fiap.lanchonete.infrastructure.orders.persistence.OrdersRepository;
+import com.fiap.lanchonete.infrastructure.payment.gateways.mappers.PaymentEntityMapper;
 import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntityMapper;
 
 @Configuration
@@ -55,13 +62,28 @@ public class BeanConfigurationOrders {
     }
 
     @Bean
-    OrderEntityMapper orderEntityMapper(CustomerEntityMapper customerEntityMapper, OrderItemEntityMapper orderItemEntityMapper){
-        return new OrderEntityMapper(customerEntityMapper, orderItemEntityMapper);
+    OrderPaymentProcessorUseCase orderPaymentProcessorUseCase(OrderGateway orderGateway, GetOrderByIdUseCase getOrderByIdUseCase, CreatePaymentUseCase createPaymentUseCase){
+        return new OrderPaymentProcessorUseCaseImpl(orderGateway, getOrderByIdUseCase, createPaymentUseCase);
+    }
+
+    @Bean
+    OrderEntityMapper orderEntityMapper(CustomerEntityMapper customerEntityMapper, OrderItemEntityMapper orderItemEntityMapper, PaymentEntityMapper paymentEntityMapper){
+        return new OrderEntityMapper(customerEntityMapper, orderItemEntityMapper, paymentEntityMapper);
     }
 
     @Bean
     OrderItemEntityMapper orderItemEntityMapper(ProductEntityMapper productEntityMapper){
         return new OrderItemEntityMapper(productEntityMapper);
+    }
+
+    @Bean
+    OrderCommandMapper orderCommandMapper(){
+        return new OrderCommandMapper();
+    }
+
+    @Bean
+    OrderDTOMapper orderDTOMapper(CustomerDTOMapper customerDTOMapper){
+        return new OrderDTOMapper(customerDTOMapper);
     }
 
 }

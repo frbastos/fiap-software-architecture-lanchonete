@@ -5,6 +5,7 @@ import com.fiap.lanchonete.domain.customers.entities.Customer;
 public class CustomerDTOMapper {
 
     public CustomerResponse toResponse(Customer customer) {
+        if(customer == null) return null;
         return new CustomerResponse(customer.getId(), customer.getName(), customer.getDocument(), customer.getMail());
     }
 

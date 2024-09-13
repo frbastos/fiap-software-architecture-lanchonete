@@ -9,7 +9,6 @@ import com.fiap.lanchonete.application.products.usecases.GetProductByIdUseCase;
 import com.fiap.lanchonete.domain.customers.entities.Customer;
 import com.fiap.lanchonete.domain.orders.entities.Order;
 import com.fiap.lanchonete.domain.orders.entities.OrderItem;
-import com.fiap.lanchonete.domain.payment.entities.PaymentPersistence;
 import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderItemRequest;
 import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderRequest;
@@ -19,7 +18,6 @@ import com.fiap.lanchonete.shared.validations.StringValidator;
 public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
 
     private final OrderGateway orderGateway;
-    private final CreatePaymentUseCase createPaymentUseCase;
     private final FindCustomerUseCase findCustomerUseCase;
     private final GetProductByIdUseCase getProductByIdUseCase;
    
@@ -30,13 +28,12 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
         GetProductByIdUseCase getProductByIdUseCase){
 
         this.orderGateway = orderGateway;
-        this.createPaymentUseCase = createPaymentUseCase;
         this.getProductByIdUseCase = getProductByIdUseCase;
         this.findCustomerUseCase = findCustomerUseCase;
     }
 
     @Override
-    public void createOrder(OrderRequest persistence) {
+    public Order createOrder(OrderRequest persistence) {
 
         Customer customer = getCustomer(persistence.document());
 
@@ -47,11 +44,7 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
             customer, 
             ordersItem);
 
-        order = orderGateway.saveAndFlush(order);
-        
-        //Fake Checkout
-        PaymentPersistence  paymentPersistence = new PaymentPersistence(order.getTotalPrice(),order.getId());
-        createPaymentUseCase.createPayment(paymentPersistence);
+        return orderGateway.saveAndFlush(order);
     }
 
     private Customer getCustomer(String document) {
