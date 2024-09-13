@@ -1,0 +1,11 @@
+INSERT INTO product (id, description, price, category) VALUES ('bc5bfa6d-7301-4e7a-9fd7-182112a28a9e','X-Salada', 25.00, 'SNACK');
+INSERT INTO product (id, description, price, category) VALUES ('885bf561-4c2e-408d-828e-cd90179d1a88', 'X-Bacon', 30.00, 'SNACK');
+INSERT INTO product (id, description, price, category) VALUES ('adae67f4-063c-411c-8d5b-1e59d28a8c05', 'X-Egg', 27.00, 'SNACK');
+INSERT INTO product (id, description, price, category) VALUES ('a030c851-c9ae-4e37-a576-67ed656c3123', 'Bata Frita', 12.00, 'SIDE_DISH');
+INSERT INTO product (id, description, price, category) VALUES ('37910f40-59e5-437f-8d5a-fc05cdd356c2', 'Polenta Frita', 12.00, 'SIDE_DISH');
+INSERT INTO product (id, description, price, category) VALUES ('3d461eeb-50cf-41d1-85a0-0016078f038f', 'Bata Frota com Cheeder e Bacon', 20.00, 'SIDE_DISH');
+INSERT INTO product (id, description, price, category) VALUES ('0d827401-fa2e-4882-ab02-bf3d78e6bcdd', 'Coca-Cola', 7.00, 'DRINK');
+INSERT INTO product (id, description, price, category) VALUES ('1b081c36-015d-43f7-8bb9-6f6a6aa845e9', 'Guaraná', 7.00, 'DRINK');
+INSERT INTO product (id, description, price, category) VALUES ('f58a0239-54d7-4bf4-a434-a908fb566b6f', 'Pepsi', 7.00, 'DRINK');
+INSERT INTO product (id, description, price, category) VALUES ('b45ffcf7-4b6e-49ae-876d-cfd2d9b98d21', 'Pudim', 7.00, 'DESSERT');
+INSERT INTO product (id, description, price, category) VALUES ('4ad687ad-b6c5-47d7-83d3-dd480cf99bae', 'Sorvete', 5.00, 'DESSERT');

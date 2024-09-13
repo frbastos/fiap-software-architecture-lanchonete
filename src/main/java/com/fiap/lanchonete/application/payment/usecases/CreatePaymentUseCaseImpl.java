@@ -1,8 +1,8 @@
 package com.fiap.lanchonete.application.payment.usecases;
 
 import com.fiap.lanchonete.application.payment.gateways.PaymentGateway;
+import com.fiap.lanchonete.application.payment.usecases.command.CreatePaymentCommand;
 import com.fiap.lanchonete.domain.payment.entities.Payment;
-import com.fiap.lanchonete.domain.payment.entities.PaymentPersistence;
 
 public class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
 
@@ -13,8 +13,8 @@ public class CreatePaymentUseCaseImpl implements CreatePaymentUseCase {
     }
 
     @Override
-    public Payment createPayment(PaymentPersistence persistence) {
-        Payment payment = new Payment(persistence.price(), persistence.idOrder());
-        return this.paymentGateway.createPayment(payment);
+    public Payment createPayment(CreatePaymentCommand command){
+        Payment payment = new Payment(null, command.time(), command.amount(), command.transactionId(), command.status());
+        return paymentGateway.createPayment(payment);
     }
 }

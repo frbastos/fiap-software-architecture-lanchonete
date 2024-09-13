@@ -4,13 +4,15 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.fiap.lanchonete.domain.payment.entities.Payment;
+import com.fiap.lanchonete.domain.payment.valueobjects.PaymentStatus;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -29,28 +31,17 @@ public class PaymentEntity {
     private UUID id;
 
     @NotNull
-    private BigDecimal price;
-    
-    @NotNull
     private LocalDateTime time;
 
     @NotNull
-    private UUID idOder;
+    private BigDecimal amount;
+    
+    @NotNull
+    @JoinColumn(name = "transaction_id")
+    private String transactionId;
 
-    public PaymentEntity(Payment payment) {
-        this.id = payment.getId();
-        this.time = payment.getTime();
-        this.price = payment.getPrice();
-        this.idOder = payment.getIdOrder();
-    }
-
-    public Payment toPayment() {
-        return new Payment(this.id, this.price, this.time, this.idOder);
-    }
-
-    @PrePersist
-    public void prePersist() {
-        this.time = LocalDateTime.now();
-    }
-
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
+   
 }
