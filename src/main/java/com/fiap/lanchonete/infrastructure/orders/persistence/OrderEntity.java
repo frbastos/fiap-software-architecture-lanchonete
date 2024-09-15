@@ -1,6 +1,7 @@
 package com.fiap.lanchonete.infrastructure.orders.persistence;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import com.fiap.lanchonete.infrastructure.customers.persistence.CustomerEntity;
 import com.fiap.lanchonete.infrastructure.payment.persistence.PaymentEntity;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -59,5 +61,8 @@ public class OrderEntity {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "payment_id")
     private PaymentEntity payment;
+
+    @Column(name = "creation_time", nullable = false)
+    private LocalDateTime creationTime;
 
 }

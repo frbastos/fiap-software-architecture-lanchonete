@@ -46,7 +46,8 @@ public class OrderEntityMapper {
                 orderEntity.getState(),
                 orderEntity.getTotalPrice(),
                 orderEntity.getPaymentConfirmationStatus(),
-                payment);
+                payment,
+                orderEntity.getCreationTime());
 
         return order;
 
@@ -69,7 +70,8 @@ public class OrderEntityMapper {
                 order.getState(),
                 order.getTotalPrice(),
                 order.getPaymentConfirmationStatus(),
-                paymentEntity);
+                paymentEntity,
+                order.getCreationTime());
 
         List<OrderItemEntity> ordersItemEntity = order.getItems()
                 .stream()

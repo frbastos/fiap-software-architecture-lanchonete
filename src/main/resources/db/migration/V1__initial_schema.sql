@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
     total_price DECIMAL(19,2) NOT NULL,
     payment_confirmation_status VARCHAR(255) NOT NULL,
     payment_id VARCHAR(36) DEFAULT NULL,
+    creation_time TIMESTAMP NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customer(id),
     FOREIGN KEY (payment_id) REFERENCES payment(id)
 );

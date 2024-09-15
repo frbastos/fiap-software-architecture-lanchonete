@@ -1,5 +1,5 @@
-INSERT INTO orders (id, customer_id, state, total_price, payment_confirmation_status, payment_id) VALUES ('bc0eccdb-f1f4-4766-84aa-b41fda366a7f', null, 'PENDING', 51.0, 'PENDING', null);
-INSERT INTO orders (id, customer_id, state, total_price, payment_confirmation_status, payment_id) VALUES ('8d50fed2-3861-40fb-ba78-f0911d3730ec', '8834adb8-193e-4bed-a0b6-f1aba4735509', 'PENDING', 67.0, 'PENDING', null);
+INSERT INTO orders (id, customer_id, state, total_price, payment_confirmation_status, payment_id, creation_time) VALUES ('bc0eccdb-f1f4-4766-84aa-b41fda366a7f', null, 'PENDING', 51.0, 'PENDING', null, '2024-09-15 09:30');
+INSERT INTO orders (id, customer_id, state, total_price, payment_confirmation_status, payment_id, creation_time) VALUES ('8d50fed2-3861-40fb-ba78-f0911d3730ec', '8834adb8-193e-4bed-a0b6-f1aba4735509', 'PENDING', 67.0, 'PENDING', null, '2024-09-15 15:00');
 
 INSERT INTO order_item (id, product_id, unit_price, quantity, observation, total_price, order_id) VALUES ('dc31cbfa-f0d9-4d73-a882-bfe424473bdd', 'bc5bfa6d-7301-4e7a-9fd7-182112a28a9e', 25.0, 1, null, 25.0, 'bc0eccdb-f1f4-4766-84aa-b41fda366a7f');
 INSERT INTO order_item (id, product_id, unit_price, quantity, observation, total_price, order_id) VALUES ('f89d27c5-d8de-413e-b454-d6032a0f5939', 'a030c851-c9ae-4e37-a576-67ed656c3123', 12.0, 1, null, 12.0, 'bc0eccdb-f1f4-4766-84aa-b41fda366a7f');

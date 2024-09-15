@@ -1,6 +1,7 @@
 package com.fiap.lanchonete.domain.orders.entities;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,7 @@ public class Order {
     private BigDecimal totalPrice;
     private PaymentConfirmationStatus paymentConfirmationStatus;
     private Payment payment;
+    private LocalDateTime creationTime;
 
     public Order(
         UUID id, 
@@ -26,7 +28,8 @@ public class Order {
         OrderState state, 
         BigDecimal totalPrice, 
         PaymentConfirmationStatus paymentConfirmationStatus, 
-        Payment payment) {
+        Payment payment,
+        LocalDateTime creationTime) {
 
         this.id = id;
         this.customer = customer;
@@ -35,6 +38,7 @@ public class Order {
         this.totalPrice = totalPrice;
         this.paymentConfirmationStatus = paymentConfirmationStatus;
         this.payment = payment;
+        this.creationTime = creationTime;
     }
 
     public Order(
@@ -43,7 +47,8 @@ public class Order {
         List<OrderItem> items, 
         OrderState state, 
         BigDecimal totalPrice, 
-        PaymentConfirmationStatus paymentConfirmationStatus) {
+        PaymentConfirmationStatus paymentConfirmationStatus,
+        LocalDateTime creationTime) {
 
         this.id = id;
         this.customer = customer;
@@ -51,6 +56,7 @@ public class Order {
         this.state = state;
         this.totalPrice = totalPrice;
         this.paymentConfirmationStatus = paymentConfirmationStatus;
+        this.creationTime = creationTime;
     }
 
     public Order(
@@ -58,7 +64,7 @@ public class Order {
             Customer customer,
             List<OrderItem> items) {
 
-        this(id, customer, items, OrderState.PENDING, BigDecimal.ZERO, PaymentConfirmationStatus.PENDING, null);
+        this(id, customer, items, OrderState.PENDING, BigDecimal.ZERO, PaymentConfirmationStatus.PENDING, LocalDateTime.now());
         this.totalPrice = calculateTotalPrice(items);
     }
 
@@ -126,5 +132,8 @@ public class Order {
             this.paymentConfirmationStatus = PaymentConfirmationStatus.PENDING;
         }
     }
-    
+
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
 }

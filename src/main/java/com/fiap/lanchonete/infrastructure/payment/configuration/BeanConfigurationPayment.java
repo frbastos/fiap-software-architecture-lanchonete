@@ -48,8 +48,8 @@ public class BeanConfigurationPayment {
     }
 
     @Bean
-    SendQRCODEPaymentToThirdPartyUseCase sendQRCODEPaymentToThirdPartyUseCase(){
-        return new SendQRCODEPaymentToThirdPartyUseCaseImpl();
+    SendQRCODEPaymentToThirdPartyUseCase sendQRCODEPaymentToThirdPartyUseCase(ProcessPaymentMockUseCase processPaymentMockUseCase){
+        return new SendQRCODEPaymentToThirdPartyUseCaseImpl(processPaymentMockUseCase);
     }
 
     @Bean
