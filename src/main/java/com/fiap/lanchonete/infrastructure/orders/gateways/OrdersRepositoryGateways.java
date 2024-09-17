@@ -46,4 +46,9 @@ public class OrdersRepositoryGateways implements OrderGateway
         return orderMapper.toOrder(orderEntity);
     }
 
+    @Override
+    public Optional<Order> getByOrderNumber(Long orderNumber) throws NotFoundException {
+        return this.repository.findByOrderNumber(orderNumber).map(orderMapper::toOrder);
+    }
+
 }

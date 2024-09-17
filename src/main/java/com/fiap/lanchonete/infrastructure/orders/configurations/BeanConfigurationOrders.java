@@ -1,18 +1,12 @@
 package com.fiap.lanchonete.infrastructure.orders.configurations;
 
+import com.fiap.lanchonete.application.orders.usecases.*;
 import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fiap.lanchonete.application.customers.usecases.FindCustomerUseCase;
 import com.fiap.lanchonete.application.orders.gateways.OrderGateway;
-import com.fiap.lanchonete.application.orders.usecases.CreateOrderUseCaseImpl;
-import com.fiap.lanchonete.application.orders.usecases.GetAllOrdersUseCaseImpl;
-import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCase;
-import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCaseImpl;
-import com.fiap.lanchonete.application.orders.usecases.OrderPaymentProcessorUseCase;
-import com.fiap.lanchonete.application.orders.usecases.OrderPaymentProcessorUseCaseImpl;
-import com.fiap.lanchonete.application.orders.usecases.UpdateOrderStateUseCaseImpl;
 import com.fiap.lanchonete.application.payment.usecases.CreatePaymentUseCase;
 import com.fiap.lanchonete.application.products.usecases.GetProductByIdUseCase;
 import com.fiap.lanchonete.infrastructure.customers.api.dto.CustomerDTOMapper;
@@ -87,4 +81,7 @@ public class BeanConfigurationOrders {
         return new OrderDTOMapper(customerDTOMapper);
     }
 
+
+    @Bean
+    GetOrderByOrderNumberUseCaseImpl getOrderByOrderNumber(OrderGateway orderGateway){ return new GetOrderByOrderNumberUseCaseImpl(orderGateway);}
 }

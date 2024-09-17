@@ -17,4 +17,6 @@ public interface OrderGateway {
 
     Order saveAndFlush(Order order);
 
+    Optional<Order>getByOrderNumber(Long orderNumber)throws NotFoundException;
+
 }

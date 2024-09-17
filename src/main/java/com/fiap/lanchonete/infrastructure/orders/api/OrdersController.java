@@ -3,6 +3,7 @@ package com.fiap.lanchonete.infrastructure.orders.api;
 import java.util.List;
 import java.util.UUID;
 
+import com.fiap.lanchonete.application.orders.usecases.*;
 import com.fiap.lanchonete.infrastructure.orders.api.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiap.lanchonete.application.orders.usecases.CreateOrderUseCase;
-import com.fiap.lanchonete.application.orders.usecases.GetAllOrdersUseCase;
-import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCase;
-import com.fiap.lanchonete.application.orders.usecases.UpdateOrderStateUseCase;
 import com.fiap.lanchonete.application.payment.usecases.SendQRCODEPaymentToThirdPartyUseCase;
 import com.fiap.lanchonete.application.payment.usecases.command.SendPaymentCommand;
 import com.fiap.lanchonete.domain.orders.entities.Order;
@@ -38,6 +35,8 @@ public class OrdersController {
     private final OrderCommandMapper orderCommandMapper;
     private final OrderDTOMapper orderDTOMapper;
 
+    private final GetOrderByOrderNumberUseCase getOrderByOrderNumberUseCase;
+
     public OrdersController(
             GetAllOrdersUseCase getAllOrdersUseCase,
             GetOrderByIdUseCase getOrderByIdUseCase,
@@ -45,7 +44,8 @@ public class OrdersController {
             CreateOrderUseCase createOrderInputPort,
             SendQRCODEPaymentToThirdPartyUseCase sendQRCODEPaymentToThirdPartyUseCase,
             OrderCommandMapper orderCommandMapper,
-            OrderDTOMapper orderDTOMapper) {
+            OrderDTOMapper orderDTOMapper,
+            GetOrderByOrderNumberUseCase getOrderByOrderNumberUseCase) {
 
         this.getAllOrdersUseCase = getAllOrdersUseCase;
         this.getOrderByIdUseCase = getOrderByIdUseCase;
@@ -54,6 +54,7 @@ public class OrdersController {
         this.sendQRCODEPaymentToThirdPartyUseCase = sendQRCODEPaymentToThirdPartyUseCase;
         this.orderCommandMapper = orderCommandMapper;
         this.orderDTOMapper = orderDTOMapper;
+        this.getOrderByOrderNumberUseCase = getOrderByOrderNumberUseCase;
     }
 
     private List<OrderResponse> mapToResponse(List<Order> orders) {
@@ -92,5 +93,11 @@ public class OrdersController {
                     .body(new OrderCreateResponse(orderCreated.getOrderNumber()));
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(new OrderCreateResponse(orderCreated.getOrderNumber()));
+    }
+
+    @GetMapping("/statePayment/{orderNumber}")
+    public ResponseEntity<OrderStatusPaymentResponse> findStatusPayment(@PathVariable Long orderNumber) {
+        Order orderPaymentStatus = this.getOrderByOrderNumberUseCase.findOrderByOrderNumber(orderNumber).get();
+        return ResponseEntity.status(HttpStatus.OK).body(new OrderStatusPaymentResponse(orderPaymentStatus.getOrderNumber(), orderPaymentStatus.getPaymentConfirmationStatus()));
     }
 }
