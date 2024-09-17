@@ -1,5 +1,6 @@
 package com.fiap.lanchonete.infrastructure.orders.configurations;
 
+import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,7 +30,7 @@ import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntit
 public class BeanConfigurationOrders {
 
     @Bean
-    OrderGateway orderGateway(OrdersRepository ordersRepository, OrderEntityMapper orderEntityMapper){
+    OrderGateway orderGateway(OrdersRepository ordersRepository, OrderEntityMapper orderEntityMapper) {
         return new OrdersRepositoryGateways(ordersRepository, orderEntityMapper);
     }
 
@@ -38,9 +39,9 @@ public class BeanConfigurationOrders {
             OrderGateway orderGateway,
             CreatePaymentUseCase createPaymentUseCase,
             GetProductByIdUseCase getProductByIdUseCase,
-            FindCustomerUseCase findCustomerUseCase) {
+            FindCustomerUseCase findCustomerUseCase, EntityManager entityManager) {
         return new CreateOrderUseCaseImpl(orderGateway, createPaymentUseCase, findCustomerUseCase,
-                getProductByIdUseCase);
+                getProductByIdUseCase, entityManager);
     }
 
     @Bean
@@ -62,27 +63,27 @@ public class BeanConfigurationOrders {
     }
 
     @Bean
-    OrderPaymentProcessorUseCase orderPaymentProcessorUseCase(OrderGateway orderGateway, GetOrderByIdUseCase getOrderByIdUseCase, CreatePaymentUseCase createPaymentUseCase){
+    OrderPaymentProcessorUseCase orderPaymentProcessorUseCase(OrderGateway orderGateway, GetOrderByIdUseCase getOrderByIdUseCase, CreatePaymentUseCase createPaymentUseCase) {
         return new OrderPaymentProcessorUseCaseImpl(orderGateway, getOrderByIdUseCase, createPaymentUseCase);
     }
 
     @Bean
-    OrderEntityMapper orderEntityMapper(CustomerEntityMapper customerEntityMapper, OrderItemEntityMapper orderItemEntityMapper, PaymentEntityMapper paymentEntityMapper){
+    OrderEntityMapper orderEntityMapper(CustomerEntityMapper customerEntityMapper, OrderItemEntityMapper orderItemEntityMapper, PaymentEntityMapper paymentEntityMapper) {
         return new OrderEntityMapper(customerEntityMapper, orderItemEntityMapper, paymentEntityMapper);
     }
 
     @Bean
-    OrderItemEntityMapper orderItemEntityMapper(ProductEntityMapper productEntityMapper){
+    OrderItemEntityMapper orderItemEntityMapper(ProductEntityMapper productEntityMapper) {
         return new OrderItemEntityMapper(productEntityMapper);
     }
 
     @Bean
-    OrderCommandMapper orderCommandMapper(){
+    OrderCommandMapper orderCommandMapper() {
         return new OrderCommandMapper();
     }
 
     @Bean
-    OrderDTOMapper orderDTOMapper(CustomerDTOMapper customerDTOMapper){
+    OrderDTOMapper orderDTOMapper(CustomerDTOMapper customerDTOMapper) {
         return new OrderDTOMapper(customerDTOMapper);
     }
 

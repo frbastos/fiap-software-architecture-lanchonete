@@ -13,7 +13,7 @@ public class OrderDTOMapper {
 
     public OrderResponse toOrderResponse(Order order) {
         return new OrderResponse(order.getId(), order.getCreationTime(), customerDTOMapper.toResponse(order.getCustomer()), order.getState(),
-                order.getTotalPrice(), order.getPaymentConfirmationStatus());
+                order.getTotalPrice(), order.getPaymentConfirmationStatus(), order.getOrderNumber());
     }
 
 }

@@ -21,6 +21,8 @@ public class Order {
     private Payment payment;
     private LocalDateTime creationTime;
 
+    private Long orderNumber;
+
     public Order(
         UUID id, 
         Customer customer, 
@@ -29,7 +31,8 @@ public class Order {
         BigDecimal totalPrice, 
         PaymentConfirmationStatus paymentConfirmationStatus, 
         Payment payment,
-        LocalDateTime creationTime) {
+        LocalDateTime creationTime,
+        Long orderNumber) {
 
         this.id = id;
         this.customer = customer;
@@ -39,6 +42,7 @@ public class Order {
         this.paymentConfirmationStatus = paymentConfirmationStatus;
         this.payment = payment;
         this.creationTime = creationTime;
+        this.orderNumber = orderNumber;
     }
 
     public Order(
@@ -48,7 +52,8 @@ public class Order {
         OrderState state, 
         BigDecimal totalPrice, 
         PaymentConfirmationStatus paymentConfirmationStatus,
-        LocalDateTime creationTime) {
+        LocalDateTime creationTime,
+        Long orderNumber) {
 
         this.id = id;
         this.customer = customer;
@@ -57,15 +62,25 @@ public class Order {
         this.totalPrice = totalPrice;
         this.paymentConfirmationStatus = paymentConfirmationStatus;
         this.creationTime = creationTime;
+        this.orderNumber = orderNumber;
     }
 
     public Order(
             UUID id,
             Customer customer,
-            List<OrderItem> items) {
+            List<OrderItem> items,
+            Long orderNumber) {
 
-        this(id, customer, items, OrderState.PENDING, BigDecimal.ZERO, PaymentConfirmationStatus.PENDING, LocalDateTime.now());
+        this(id, customer, items, OrderState.PENDING, BigDecimal.ZERO, PaymentConfirmationStatus.PENDING, LocalDateTime.now(), orderNumber);
         this.totalPrice = calculateTotalPrice(items);
+    }
+
+    public Long getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     public UUID getId() {

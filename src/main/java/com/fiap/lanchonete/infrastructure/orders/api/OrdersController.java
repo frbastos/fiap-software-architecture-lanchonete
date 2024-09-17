@@ -3,6 +3,7 @@ package com.fiap.lanchonete.infrastructure.orders.api;
 import java.util.List;
 import java.util.UUID;
 
+import com.fiap.lanchonete.infrastructure.orders.api.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +22,6 @@ import com.fiap.lanchonete.application.payment.usecases.SendQRCODEPaymentToThird
 import com.fiap.lanchonete.application.payment.usecases.command.SendPaymentCommand;
 import com.fiap.lanchonete.domain.orders.entities.Order;
 import com.fiap.lanchonete.domain.orders.valueobjects.OrderState;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderCommandMapper;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderDTOMapper;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderRequest;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -84,7 +81,7 @@ public class OrdersController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createOrder(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<OrderCreateResponse> createOrder(@RequestBody OrderRequest orderRequest) {
         Order orderCreated = this.createOrderInputPort.createOrder(orderRequest);
         try {
             SendPaymentCommand sendPaymentQRCODECommand = orderCommandMapper.toSendPaymentQRCODECommand(orderCreated);
@@ -92,8 +89,8 @@ public class OrdersController {
         } catch (Exception e) {
             log.error("Error sending payment for order: " + orderCreated.getId(), e);
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("Order created successfully, but an error occurred while processing the payment.");
+                    .body(new OrderCreateResponse(orderCreated.getOrderNumber()));
         }
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(new OrderCreateResponse(orderCreated.getOrderNumber()));
     }
 }
