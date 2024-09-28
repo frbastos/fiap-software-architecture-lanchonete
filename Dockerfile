@@ -11,7 +11,7 @@ COPY . .
 RUN chmod +x gradlew
 
 # Executar os testes do Gradle
-RUN ./gradlew test --no-daemon
+# RUN ./gradlew test --no-daemon
 
 # Executar o comando de build do Gradle
 RUN ./gradlew build --no-daemon
@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=build /home/gradle/project/build/libs/*.jar app.jar
 
 # Definir o comando para executar o aplicativo
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java","-jar","/app/app.jar", "--spring.profiles.active=${SPRING_PROFILES_ACTIVE}"]
 
 # Expor a porta que a aplicação vai usar
 EXPOSE 8080
