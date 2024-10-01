@@ -1,7 +1,5 @@
 package com.fiap.lanchonete.infrastructure.customers.persistence;
 
-import java.util.UUID;
-
 import com.fiap.lanchonete.domain.customers.entities.Customer;
 
 import jakarta.persistence.Entity;
@@ -22,8 +20,8 @@ import lombok.NoArgsConstructor;
 public class CustomerEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank
 

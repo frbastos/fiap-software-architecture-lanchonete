@@ -2,7 +2,6 @@ package com.fiap.lanchonete.infrastructure.products.gateways;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.fiap.lanchonete.application.products.gateways.ProductGateway;
 import com.fiap.lanchonete.domain.products.entities.Product;
@@ -32,7 +31,7 @@ public class ProductRepositoryGateway implements ProductGateway {
     }
 
     @Override
-    public void remove(UUID id) {
+    public void remove(Long id) {
         this.productRepository.deleteById(id);
     }
 
@@ -43,7 +42,7 @@ public class ProductRepositoryGateway implements ProductGateway {
     }
 
     @Override
-    public Optional<Product> getById(UUID id) {
+    public Optional<Product> getById(Long id) {
         return this.productRepository.findById(id).map(entity -> productEntityMapper.toProduct(entity));
     }
 

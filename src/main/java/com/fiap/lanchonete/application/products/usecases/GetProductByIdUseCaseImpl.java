@@ -1,7 +1,6 @@
 package com.fiap.lanchonete.application.products.usecases;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import com.fiap.lanchonete.application.products.gateways.ProductGateway;
 import com.fiap.lanchonete.domain.products.entities.Product;
@@ -16,7 +15,7 @@ public class GetProductByIdUseCaseImpl implements GetProductByIdUseCase {
     }
 
     @Override
-    public Optional<Product> getById(UUID id) throws NotFoundException {
+    public Optional<Product> getById(Long id) throws NotFoundException {
         return this.productGateway.getById(id);
     }
 

@@ -1,7 +1,5 @@
 package com.fiap.lanchonete.application.products.usecases;
 
-import java.util.UUID;
-
 import com.fiap.lanchonete.application.products.gateways.ProductGateway;
 import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
@@ -15,7 +13,7 @@ public class RemoveProductUseCaseImpl implements RemoveProductUseCase {
     }
 
     @Override
-    public void remove(UUID id) {
+    public void remove(Long id) {
         Product product = productGateway.getById(id).orElseThrow((NotFoundException::new));
         productGateway.remove(product.getId());
     }

@@ -1,7 +1,6 @@
 package com.fiap.lanchonete.infrastructure.products.persistence;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import com.fiap.lanchonete.domain.products.entities.Product;
 import com.fiap.lanchonete.domain.products.valueobjects.Category;
@@ -28,8 +27,8 @@ import lombok.NoArgsConstructor;
 public class ProductEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank
     private String description;

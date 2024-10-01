@@ -3,7 +3,6 @@ package com.fiap.lanchonete.domain.orders.entities;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import com.fiap.lanchonete.domain.customers.entities.Customer;
 import com.fiap.lanchonete.domain.orders.valueobjects.OrderState;
@@ -12,7 +11,7 @@ import com.fiap.lanchonete.domain.payment.entities.Payment;
 
 public class Order {
 
-    private UUID id;
+    private Long id;
     private Customer customer;
     private List<OrderItem> items;
     private OrderState state;
@@ -22,7 +21,7 @@ public class Order {
     private LocalDateTime creationTime;
 
     public Order(
-        UUID id, 
+        Long id, 
         Customer customer, 
         List<OrderItem> items, 
         OrderState state, 
@@ -42,7 +41,7 @@ public class Order {
     }
 
     public Order(
-        UUID id, 
+        Long id, 
         Customer customer, 
         List<OrderItem> items, 
         OrderState state, 
@@ -60,7 +59,7 @@ public class Order {
     }
 
     public Order(
-            UUID id,
+            Long id,
             Customer customer,
             List<OrderItem> items) {
 
@@ -68,7 +67,7 @@ public class Order {
         this.totalPrice = calculateTotalPrice(items);
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

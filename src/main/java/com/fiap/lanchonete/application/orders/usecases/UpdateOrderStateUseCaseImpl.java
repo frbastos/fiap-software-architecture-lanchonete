@@ -1,7 +1,5 @@
 package com.fiap.lanchonete.application.orders.usecases;
 
-import java.util.UUID;
-
 import com.fiap.lanchonete.application.orders.gateways.OrderGateway;
 import com.fiap.lanchonete.domain.orders.entities.Order;
 import com.fiap.lanchonete.domain.orders.valueobjects.OrderState;
@@ -17,7 +15,7 @@ public class UpdateOrderStateUseCaseImpl implements UpdateOrderStateUseCase {
     }
 
     @Override
-    public void updateState(UUID id, OrderState state) {
+    public void updateState(Long id, OrderState state) {
         Order order = orderGateway.getById(id).orElseThrow((NotFoundException::new));
         order.updateState(state);
         orderGateway.save(order);
