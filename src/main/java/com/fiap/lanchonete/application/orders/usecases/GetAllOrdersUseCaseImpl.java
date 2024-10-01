@@ -7,7 +7,7 @@ import com.fiap.lanchonete.domain.orders.entities.Order;
 
 public class GetAllOrdersUseCaseImpl implements GetAllOrdersUseCase {
 
-     private final OrderGateway orderGateway;
+    private final OrderGateway orderGateway;
 
     public GetAllOrdersUseCaseImpl(OrderGateway orderGateway){
         this.orderGateway = orderGateway;
@@ -17,5 +17,11 @@ public class GetAllOrdersUseCaseImpl implements GetAllOrdersUseCase {
     public List<Order> getAll() {
         return orderGateway.getAll();
     }
+
+    @Override
+    public List<Order> getAllOrderDesc() {
+        return orderGateway.getAllOrderDesc();
+    }
+
 
 }

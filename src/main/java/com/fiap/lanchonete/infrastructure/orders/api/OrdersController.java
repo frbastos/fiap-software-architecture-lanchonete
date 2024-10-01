@@ -3,6 +3,9 @@ package com.fiap.lanchonete.infrastructure.orders.api;
 import java.util.List;
 import java.util.UUID;
 
+import com.fiap.lanchonete.application.orders.usecases.*;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiap.lanchonete.application.orders.usecases.CreateOrderUseCase;
-import com.fiap.lanchonete.application.orders.usecases.GetAllOrdersUseCase;
-import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCase;
-import com.fiap.lanchonete.application.orders.usecases.UpdateOrderStateUseCase;
 import com.fiap.lanchonete.application.payment.usecases.SendQRCODEPaymentToThirdPartyUseCase;
 import com.fiap.lanchonete.application.payment.usecases.command.SendPaymentCommand;
 import com.fiap.lanchonete.domain.orders.entities.Order;
 import com.fiap.lanchonete.domain.orders.valueobjects.OrderState;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderCommandMapper;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderDTOMapper;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderRequest;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,6 +35,9 @@ public class OrdersController {
     private final SendQRCODEPaymentToThirdPartyUseCase sendQRCODEPaymentToThirdPartyUseCase;
     private final OrderCommandMapper orderCommandMapper;
     private final OrderDTOMapper orderDTOMapper;
+    private final GetOrderByOrderNumberUseCase getOrderByOrderNumberUseCase;
+
+    private final OrderGroupedMapper orderGroupedMapper;
 
     public OrdersController(
             GetAllOrdersUseCase getAllOrdersUseCase,
@@ -48,7 +46,8 @@ public class OrdersController {
             CreateOrderUseCase createOrderInputPort,
             SendQRCODEPaymentToThirdPartyUseCase sendQRCODEPaymentToThirdPartyUseCase,
             OrderCommandMapper orderCommandMapper,
-            OrderDTOMapper orderDTOMapper) {
+            OrderDTOMapper orderDTOMapper,
+            GetOrderByOrderNumberUseCase getOrderByOrderNumberUseCase, OrderGroupedMapper orderGroupedMapper) {
 
         this.getAllOrdersUseCase = getAllOrdersUseCase;
         this.getOrderByIdUseCase = getOrderByIdUseCase;
@@ -57,6 +56,8 @@ public class OrdersController {
         this.sendQRCODEPaymentToThirdPartyUseCase = sendQRCODEPaymentToThirdPartyUseCase;
         this.orderCommandMapper = orderCommandMapper;
         this.orderDTOMapper = orderDTOMapper;
+        this.getOrderByOrderNumberUseCase = getOrderByOrderNumberUseCase;
+        this.orderGroupedMapper = orderGroupedMapper;
     }
 
     private List<OrderResponse> mapToResponse(List<Order> orders) {
@@ -65,6 +66,14 @@ public class OrdersController {
 
     private OrderResponse mapToResponse(Order order) {
         return orderDTOMapper.toOrderResponse(order);
+    }
+
+    private List<OrderFollowUp> matToOrderFollowUp(List<Order> orders){
+        return orders.stream().map(this::matToOrderFollowUp).toList();
+    }
+
+    private OrderFollowUp matToOrderFollowUp ( Order order){
+        return orderGroupedMapper.toOrderFollowUp(order);
     }
 
     @GetMapping("")
@@ -84,7 +93,7 @@ public class OrdersController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createOrder(@RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<OrderCreateResponse> createOrder(@RequestBody OrderRequest orderRequest) {
         Order orderCreated = this.createOrderInputPort.createOrder(orderRequest);
         try {
             SendPaymentCommand sendPaymentQRCODECommand = orderCommandMapper.toSendPaymentQRCODECommand(orderCreated);
@@ -92,8 +101,20 @@ public class OrdersController {
         } catch (Exception e) {
             log.error("Error sending payment for order: " + orderCreated.getId(), e);
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("Order created successfully, but an error occurred while processing the payment.");
+                    .body(new OrderCreateResponse(orderCreated.getOrderNumber()));
         }
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(new OrderCreateResponse(orderCreated.getOrderNumber()));
+    }
+
+    @GetMapping("/statePayment/{orderNumber}")
+    public ResponseEntity<OrderStatusPaymentResponse> findStatusPayment(@PathVariable Long orderNumber) {
+        Order orderPaymentStatus = this.getOrderByOrderNumberUseCase.findOrderByOrderNumber(orderNumber).get();
+        return ResponseEntity.status(HttpStatus.OK).body(new OrderStatusPaymentResponse(orderPaymentStatus.getOrderNumber(), orderPaymentStatus.getPaymentConfirmationStatus()));
+    }
+
+    @GetMapping("/follow-up")
+    public ResponseEntity<OrderGroupedResponse> findFollowUp(){
+        List<Order> orders = this.getAllOrdersUseCase.getAllOrderDesc();
+        return ResponseEntity.status(HttpStatus.OK).body(orderGroupedMapper.getGropedOrders(orders));
     }
 }

@@ -14,6 +14,7 @@ public record OrderResponse(
         CustomerResponse customer,
         OrderState state,
         BigDecimal totalPrice,
-        PaymentConfirmationStatus paymentConfirmationStatus) {
+        PaymentConfirmationStatus paymentConfirmationStatus,
+        Long orderNumber) {
 
 }
