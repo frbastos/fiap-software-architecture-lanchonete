@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.fiap.lanchonete.application.orders.usecases.*;
 import com.fiap.lanchonete.infrastructure.orders.api.dto.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +35,9 @@ public class OrdersController {
     private final SendQRCODEPaymentToThirdPartyUseCase sendQRCODEPaymentToThirdPartyUseCase;
     private final OrderCommandMapper orderCommandMapper;
     private final OrderDTOMapper orderDTOMapper;
-
     private final GetOrderByOrderNumberUseCase getOrderByOrderNumberUseCase;
+
+    private final OrderGroupedMapper orderGroupedMapper;
 
     public OrdersController(
             GetAllOrdersUseCase getAllOrdersUseCase,
@@ -45,7 +47,7 @@ public class OrdersController {
             SendQRCODEPaymentToThirdPartyUseCase sendQRCODEPaymentToThirdPartyUseCase,
             OrderCommandMapper orderCommandMapper,
             OrderDTOMapper orderDTOMapper,
-            GetOrderByOrderNumberUseCase getOrderByOrderNumberUseCase) {
+            GetOrderByOrderNumberUseCase getOrderByOrderNumberUseCase, OrderGroupedMapper orderGroupedMapper) {
 
         this.getAllOrdersUseCase = getAllOrdersUseCase;
         this.getOrderByIdUseCase = getOrderByIdUseCase;
@@ -55,6 +57,7 @@ public class OrdersController {
         this.orderCommandMapper = orderCommandMapper;
         this.orderDTOMapper = orderDTOMapper;
         this.getOrderByOrderNumberUseCase = getOrderByOrderNumberUseCase;
+        this.orderGroupedMapper = orderGroupedMapper;
     }
 
     private List<OrderResponse> mapToResponse(List<Order> orders) {
@@ -63,6 +66,14 @@ public class OrdersController {
 
     private OrderResponse mapToResponse(Order order) {
         return orderDTOMapper.toOrderResponse(order);
+    }
+
+    private List<OrderFollowUp> matToOrderFollowUp(List<Order> orders){
+        return orders.stream().map(this::matToOrderFollowUp).toList();
+    }
+
+    private OrderFollowUp matToOrderFollowUp ( Order order){
+        return orderGroupedMapper.toOrderFollowUp(order);
     }
 
     @GetMapping("")
@@ -99,5 +110,11 @@ public class OrdersController {
     public ResponseEntity<OrderStatusPaymentResponse> findStatusPayment(@PathVariable Long orderNumber) {
         Order orderPaymentStatus = this.getOrderByOrderNumberUseCase.findOrderByOrderNumber(orderNumber).get();
         return ResponseEntity.status(HttpStatus.OK).body(new OrderStatusPaymentResponse(orderPaymentStatus.getOrderNumber(), orderPaymentStatus.getPaymentConfirmationStatus()));
+    }
+
+    @GetMapping("/follow-up")
+    public ResponseEntity<OrderGroupedResponse> findFollowUp(){
+        List<Order> orders = this.getAllOrdersUseCase.getAllOrderDesc();
+        return ResponseEntity.status(HttpStatus.OK).body(orderGroupedMapper.getGropedOrders(orders));
     }
 }

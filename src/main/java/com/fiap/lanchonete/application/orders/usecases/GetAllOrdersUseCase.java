@@ -8,4 +8,6 @@ public interface GetAllOrdersUseCase {
 
     List<Order> getAll();
 
+    List<Order> getAllOrderDesc();
+
 }

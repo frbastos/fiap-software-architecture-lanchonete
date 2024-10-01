@@ -51,4 +51,10 @@ public class OrdersRepositoryGateways implements OrderGateway
         return this.repository.findByOrderNumber(orderNumber).map(orderMapper::toOrder);
     }
 
+    @Override
+    public List<Order> getAllOrderDesc() {
+        List<OrderEntity> orderDesc = this.repository.findAllOrderByDateCreation();
+        return orderMapper.toListOrderItem(orderDesc);
+    }
+
 }

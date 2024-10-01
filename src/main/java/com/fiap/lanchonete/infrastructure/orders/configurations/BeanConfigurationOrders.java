@@ -1,6 +1,7 @@
 package com.fiap.lanchonete.infrastructure.orders.configurations;
 
 import com.fiap.lanchonete.application.orders.usecases.*;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderGroupedMapper;
 import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -84,4 +85,7 @@ public class BeanConfigurationOrders {
 
     @Bean
     GetOrderByOrderNumberUseCaseImpl getOrderByOrderNumber(OrderGateway orderGateway){ return new GetOrderByOrderNumberUseCaseImpl(orderGateway);}
+
+    @Bean
+    OrderGroupedMapper orderGroupedMapper(){return new OrderGroupedMapper();}
 }

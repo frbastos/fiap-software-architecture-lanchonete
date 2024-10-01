@@ -19,4 +19,6 @@ public interface OrderGateway {
 
     Optional<Order>getByOrderNumber(Long orderNumber)throws NotFoundException;
 
+    List<Order> getAllOrderDesc();
+
 }
