@@ -17,8 +17,10 @@ public interface OrderGateway {
 
     Order saveAndFlush(Order order);
 
-    Optional<Order>getByOrderNumber(Long orderNumber)throws NotFoundException;
+    Optional<Order> getByOrderNumber(Long orderNumber) throws NotFoundException;
 
     List<Order> getAllOrderDesc();
+
+    Long getOrderNumber();
 
 }

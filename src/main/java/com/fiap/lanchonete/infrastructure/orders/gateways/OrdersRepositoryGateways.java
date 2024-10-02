@@ -10,15 +10,22 @@ import com.fiap.lanchonete.infrastructure.orders.gateways.mappers.OrderEntityMap
 import com.fiap.lanchonete.infrastructure.orders.persistence.OrderEntity;
 import com.fiap.lanchonete.infrastructure.orders.persistence.OrdersRepository;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 
 public class OrdersRepositoryGateways implements OrderGateway
 {
     private final OrdersRepository repository;
     private final OrderEntityMapper orderMapper;
 
-    public OrdersRepositoryGateways(OrdersRepository repository, OrderEntityMapper orderMapper) {
+    @PersistenceContext
+    private final EntityManager entityManager;
+
+    public OrdersRepositoryGateways(OrdersRepository repository, OrderEntityMapper orderMapper, EntityManager entityManager) {
         this.repository = repository;
         this.orderMapper = orderMapper;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -55,6 +62,12 @@ public class OrdersRepositoryGateways implements OrderGateway
     public List<Order> getAllOrderDesc() {
         List<OrderEntity> orderDesc = this.repository.findAllOrderByDateCreation();
         return orderMapper.toListOrderItem(orderDesc);
+    }
+
+    @Override
+    public Long getOrderNumber() {
+        Query query = entityManager.createNativeQuery("SELECT nextval('order_sequence')");
+        return (Long) query.getSingleResult();
     }
 
 }
