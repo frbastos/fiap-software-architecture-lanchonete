@@ -62,7 +62,7 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 
 ### Pré-requisitos
 - Docker
-- Docker Compose
+- Kubernete
 
 ### Passos para Execução
 
@@ -72,7 +72,13 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
    cd lanchonete
 
 3. Suba o ambiente:
-    docker-compose up --build
+    ```bash
+    kubectl apply -f pv.yaml
+    kubectl apply -f pvc.yaml
+    kubectl apply -f mysql-srv.yaml
+    kubectl apply -f mysql-pod.yaml
+    kubectl apply -f app-deployment.yaml
+    kubectl apply -f app-deployment-hpa.yaml
 
 ### Acesso ao Swagger
 
