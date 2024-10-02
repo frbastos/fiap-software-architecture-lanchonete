@@ -69,10 +69,11 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 1. Clone o repositório:
    ```bash
    git clone https://github.com/frbastos/fiap-software-architecture-lanchonete.git
-   cd lanchonete
+   cd fiap-software-architecture-lanchonete
 
 3. Suba o ambiente:
     ```bash
+    cd infra
     kubectl apply -f pv.yaml
     kubectl apply -f pvc.yaml
     kubectl apply -f mysql-srv.yaml
