@@ -25,8 +25,8 @@ import com.fiap.lanchonete.infrastructure.products.gateways.mappers.ProductEntit
 public class BeanConfigurationOrders {
 
     @Bean
-    OrderGateway orderGateway(OrdersRepository ordersRepository, OrderEntityMapper orderEntityMapper) {
-        return new OrdersRepositoryGateways(ordersRepository, orderEntityMapper);
+    OrderGateway orderGateway(OrdersRepository ordersRepository, OrderEntityMapper orderEntityMapper, EntityManager entityManager) {
+        return new OrdersRepositoryGateways(ordersRepository, orderEntityMapper, entityManager);
     }
 
     @Bean
@@ -34,9 +34,9 @@ public class BeanConfigurationOrders {
             OrderGateway orderGateway,
             CreatePaymentUseCase createPaymentUseCase,
             GetProductByIdUseCase getProductByIdUseCase,
-            FindCustomerUseCase findCustomerUseCase, EntityManager entityManager) {
+            FindCustomerUseCase findCustomerUseCase) {
         return new CreateOrderUseCaseImpl(orderGateway, createPaymentUseCase, findCustomerUseCase,
-                getProductByIdUseCase, entityManager);
+                getProductByIdUseCase);
     }
 
     @Bean

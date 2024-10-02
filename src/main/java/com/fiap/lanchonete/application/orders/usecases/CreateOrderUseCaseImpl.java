@@ -1,8 +1,5 @@
 package com.fiap.lanchonete.application.orders.usecases;
 
-import java.math.BigInteger;
-import java.util.List;
-
 import com.fiap.lanchonete.application.customers.usecases.FindCustomerUseCase;
 import com.fiap.lanchonete.application.orders.gateways.OrderGateway;
 import com.fiap.lanchonete.application.payment.usecases.CreatePaymentUseCase;
@@ -15,9 +12,8 @@ import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderItemRequest;
 import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderRequest;
 import com.fiap.lanchonete.shared.exception.NotFoundException;
 import com.fiap.lanchonete.shared.validations.StringValidator;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+
+import java.util.List;
 
 
 public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
@@ -26,20 +22,17 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
     private final FindCustomerUseCase findCustomerUseCase;
     private final GetProductByIdUseCase getProductByIdUseCase;
 
-    @PersistenceContext
-    private final EntityManager entityManager;
-
     public CreateOrderUseCaseImpl(
             OrderGateway orderGateway,
             CreatePaymentUseCase createPaymentUseCase,
             FindCustomerUseCase findCustomerUseCase,
-            GetProductByIdUseCase getProductByIdUseCase,
-            EntityManager entityManager) {
+            GetProductByIdUseCase getProductByIdUseCase
+            ) {
 
         this.orderGateway = orderGateway;
         this.getProductByIdUseCase = getProductByIdUseCase;
         this.findCustomerUseCase = findCustomerUseCase;
-        this.entityManager = entityManager;
+
     }
 
     @Override
@@ -53,7 +46,7 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
                 null,
                 customer,
                 ordersItem,
-                generateOrderNumber());
+                orderGateway.getOrderNumber());
 
         return orderGateway.saveAndFlush(order);
     }
@@ -77,12 +70,4 @@ public class CreateOrderUseCaseImpl implements CreateOrderUseCase {
 
         }).toList();
     }
-
-
-    private  Long generateOrderNumber() {
-        Query query = entityManager.createNativeQuery("SELECT nextval('order_sequence')");
-        return (Long) query.getSingleResult();
-    }
-
-
 }
