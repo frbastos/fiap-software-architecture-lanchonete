@@ -1,7 +1,6 @@
 package com.fiap.lanchonete.infrastructure.products.api;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -73,14 +72,14 @@ public class ProductsController {
     }
 
     @PutMapping("/{id}")
-    public ProductResponse updateProduct(@PathVariable("id") UUID id, @RequestBody UpdateProductRequest update) {
+    public ProductResponse updateProduct(@PathVariable("id") Long id, @RequestBody UpdateProductRequest update) {
         UpdateProductCommand updateCommand = productCommandMapper.toUpdateCommand(id, update);
         Product product = updateProductUseCase.update(updateCommand);
         return productDTOMapper.toResponse(product);
     }
 
     @GetMapping("/{id}")
-    public ProductResponse getProductById(@PathVariable("id") UUID id) {
+    public ProductResponse getProductById(@PathVariable("id") Long id) {
         Product product = this.getProductByIdUseCase.getById(id).orElseThrow(NotFoundException::new);
         return productDTOMapper.toResponse(product);
     }
@@ -97,7 +96,7 @@ public class ProductsController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> removeProduct(@PathVariable("id") UUID id) {
+    public ResponseEntity<?> removeProduct(@PathVariable("id") Long id) {
         removeProductUseCase.remove(id);
         return ResponseEntity.ok().build();
     }

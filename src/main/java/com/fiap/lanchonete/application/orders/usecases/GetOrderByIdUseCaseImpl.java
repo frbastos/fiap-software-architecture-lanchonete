@@ -1,7 +1,6 @@
 package com.fiap.lanchonete.application.orders.usecases;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import com.fiap.lanchonete.application.orders.gateways.OrderGateway;
 import com.fiap.lanchonete.domain.orders.entities.Order;
@@ -15,7 +14,7 @@ public class GetOrderByIdUseCaseImpl implements GetOrderByIdUseCase {
     }
 
     @Override
-    public Optional<Order> getOrderById(UUID id) {
+    public Optional<Order> getOrderById(Long id) {
         return orderGateway.getById(id);
     }
 

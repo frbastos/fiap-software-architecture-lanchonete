@@ -1,7 +1,7 @@
 package com.fiap.lanchonete.application.payment.usecases;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Random;
 
 import com.fiap.lanchonete.application.payment.gateways.PaymentProcessorGateway;
 import com.fiap.lanchonete.application.payment.usecases.command.ProcessPaymentMockCommand;
@@ -27,10 +27,16 @@ public class ProcessPaymentMockUseCaseImpl implements ProcessPaymentMockUseCase 
                 processPaymentMockCommand.orderId(),
                 processPaymentMockCommand.amount(),
                 LocalDateTime.now(),
-                UUID.randomUUID().toString(),
+                generateRandomNumberTrasaction(),
                 PaymentStatus.APPROVED);
 
         paymentProcessorGateway.sendNotification(sendPaymentNotification);
+    }
+
+    private Long generateRandomNumberTrasaction(){
+        Random random = new Random();
+        long randomLong = random.nextLong();
+        return randomLong == Long.MIN_VALUE ? 0 : Math.abs(randomLong);
     }
 
 }

@@ -1,20 +1,19 @@
 package com.fiap.lanchonete.domain.orders.entities;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import com.fiap.lanchonete.domain.products.entities.Product;
 
 public class OrderItem {
 
-    private UUID id;
+    private Long id;
     private Product product;
     private BigDecimal unitPrice;
     private int quantity;
     private String observation;
     private BigDecimal totalPrice;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
@@ -41,7 +40,7 @@ public class OrderItem {
     
 
     public OrderItem(
-            UUID id, 
+            Long id, 
             Product product, 
             BigDecimal unitPrice, 
             int quantity, 
@@ -56,7 +55,7 @@ public class OrderItem {
     }
 
     public OrderItem(
-            UUID id,
+            Long id,
             Product product,
             int quantity,
             String observation

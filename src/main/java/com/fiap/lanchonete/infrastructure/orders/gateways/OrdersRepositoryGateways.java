@@ -2,7 +2,6 @@ package com.fiap.lanchonete.infrastructure.orders.gateways;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import com.fiap.lanchonete.application.orders.gateways.OrderGateway;
 import com.fiap.lanchonete.domain.orders.entities.Order;
@@ -35,7 +34,7 @@ public class OrdersRepositoryGateways implements OrderGateway
     }
 
     @Override
-    public Optional<Order> getById(UUID id) throws NotFoundException {
+    public Optional<Order> getById(Long id) throws NotFoundException {
         return this.repository.findById(id).map(order -> orderMapper.toOrder(order));
     }
 

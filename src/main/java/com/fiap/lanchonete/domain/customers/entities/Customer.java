@@ -1,10 +1,8 @@
 package com.fiap.lanchonete.domain.customers.entities;
 
-import java.util.UUID;
-
 public class Customer {
 
-    private UUID id;
+    private Long id;
 
     private String name;
 
@@ -12,14 +10,14 @@ public class Customer {
 
     private String mail;
 
-    public Customer(UUID id, String name, String document, String mail) {
+    public Customer(Long id, String name, String document, String mail) {
         this.id = id;
         this.mail = mail;
         this.document = document;
         this.name = name;
     }
 
-    public UUID getId() {return id;}
+    public Long getId() {return id;}
 
     public String getName() { return name;}
 

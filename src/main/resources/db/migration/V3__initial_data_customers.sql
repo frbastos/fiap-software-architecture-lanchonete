@@ -1,2 +1,0 @@
-INSERT INTO customer (id, name, document, mail) VALUES ('8834adb8-193e-4bed-a0b6-f1aba4735509', 'Roberta Carlos', '111.111.111.-11', 'roberto@email.com');
-INSERT INTO customer (id, name, document, mail) VALUES ('d47fc922-e4e4-4a26-b6e1-00ad58a35249', 'Flavia Souza', '222.222.222.-22', 'flavia@email.com');

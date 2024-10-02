@@ -1,7 +1,6 @@
 package com.fiap.lanchonete.infrastructure.orders.api;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.fiap.lanchonete.application.orders.usecases.*;
 import com.fiap.lanchonete.infrastructure.orders.api.dto.*;
@@ -83,12 +82,12 @@ public class OrdersController {
     }
 
     @GetMapping("/{id}")
-    public OrderResponse getOrderById(@PathVariable("id") UUID id) {
+    public OrderResponse getOrderById(@PathVariable("id") Long id) {
         return mapToResponse(this.getOrderByIdUseCase.getOrderById(id).get());
     }
 
     @PatchMapping("/{id}/state")
-    public void updateOrderState(@PathVariable("id") UUID id, @RequestBody OrderState state) {
+    public void updateOrderState(@PathVariable("id") Long id, @RequestBody OrderState state) {
         this.updateOrderStateInputPort.updateState(id, state);
     }
 

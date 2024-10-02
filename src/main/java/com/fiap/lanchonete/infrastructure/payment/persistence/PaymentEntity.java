@@ -2,7 +2,6 @@ package com.fiap.lanchonete.infrastructure.payment.persistence;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import com.fiap.lanchonete.domain.payment.valueobjects.PaymentStatus;
 
@@ -27,8 +26,8 @@ import lombok.NoArgsConstructor;
 public class PaymentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
     private LocalDateTime time;

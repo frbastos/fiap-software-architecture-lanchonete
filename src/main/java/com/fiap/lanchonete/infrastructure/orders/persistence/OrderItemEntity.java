@@ -1,7 +1,6 @@
 package com.fiap.lanchonete.infrastructure.orders.persistence;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import com.fiap.lanchonete.infrastructure.products.persistence.ProductEntity;
 
@@ -25,8 +24,8 @@ import lombok.NoArgsConstructor;
 public class OrderItemEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
