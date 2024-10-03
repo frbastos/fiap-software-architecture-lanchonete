@@ -81,6 +81,20 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
     kubectl apply -f app-deployment.yaml
     kubectl apply -f app-deployment-hpa.yaml
 
+4. Monitorando os pods:
+  ```bash
+  kubectl get pods --watch
+
+5. Limpar o ambiente:
+    ```bash
+    cd infra
+    kubectl delete --all hpa 
+    kubectl delete --all deployment
+    kubectl delete --all service
+    kubectl delete --all pod
+    kubectl delete --all pv
+    kubectl delete --all pvc
+
 ### Acesso ao Swagger
 
 Para acessar a documentação Swagger da API, utilize o seguinte endpoint:
