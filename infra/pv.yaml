@@ -7,6 +7,7 @@ spec:
     storage: 50Mi
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-storage-db 
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: "/Users/frbastos/Documents/FIAP/Arquitetura de Software/Projeto/fiap-software-architecture-lanchonete/infra"
+    path: "/Users/frbastos/Documents/FIAP/Arquitetura de Software/Projeto/fiap-software-architecture-lanchonete/infra/data"

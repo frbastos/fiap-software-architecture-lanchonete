@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: mysql-srv
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 3306
   selector:
