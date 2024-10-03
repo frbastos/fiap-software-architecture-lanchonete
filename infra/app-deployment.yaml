@@ -28,6 +28,20 @@ spec:
         image: ar989827/lanchonete:v1
         ports:
           - containerPort: 8080
+          # Liveness Probe
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          # Readiness Probe
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
         resources:
           limits:
             cpu: 200m # O pod pode consumir até 500 milicores de CPU
