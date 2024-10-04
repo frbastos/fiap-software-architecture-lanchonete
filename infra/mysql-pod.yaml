@@ -1,35 +1,33 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mysql-pod
+  name: postgresql-pod
   labels:
-    app: mysql-pod
+    app: postgresql-pod
 spec:
   containers:
-  - name: mysql
-    image: mysql:8.0
-    resources:
-      limits:
-        cpu: 200m
-        memory: 500Mi
-      requests:
-        cpu: 100m
-        memory: 200Mi
-    env:
-      - name: MYSQL_ROOT_PASSWORD
-        value: "rootpassword"
-      - name: MYSQL_DATABASE
-        value: "lanchonetedb"
-      - name: MYSQL_USER
-        value: "sa"
-      - name: MYSQL_PASSWORD
-        value: "password"
-    ports:
-    - containerPort:  3306
-    volumeMounts:
-    - name: mysql-persistent-storage
-      mountPath: /var/lib/mysql
+    - name: postgresql
+      image: postgres:14 # Use a versão desejada do PostgreSQL
+      resources:
+        limits:
+          cpu: 200m
+          memory: 500Mi
+        requests:
+          cpu: 100m
+          memory: 200Mi
+      env:
+        - name: POSTGRES_DB
+          value: "lanchonetedb" # Nome do banco de dados a ser criado
+        - name: POSTGRES_USER
+          value: "postgres" # Nome do usuário
+        - name: POSTGRES_PASSWORD
+          value: "admin" # Senha do usuário
+      ports:
+        - containerPort: 5432 # Porta padrão do PostgreSQL
+      volumeMounts:
+        - name: postgresql-persistent-storage
+          mountPath: /var/lib/postgresql/data # Caminho onde o PostgreSQL armazena seus dados
   volumes:
-    - name: mysql-persistent-storage
+    - name: postgresql-persistent-storage
       persistentVolumeClaim:
-        claimName: lanchonete-pvc
+        claimName: lanchonete-pvc # Certifique-se de que o PVC foi criado para o PostgreSQL

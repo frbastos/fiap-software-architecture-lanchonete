@@ -6,12 +6,13 @@ WORKDIR /home/gradle/project
 
 # Copiar todos os arquivos do projeto para o contêiner
 COPY . .
+# Isso deve funcionar se você estiver no diretório correto
 
-# Adicione permissão de execução ao script gradlew
-RUN chmod +x gradlew
+# Adicionar permissão de execução ao script gradlew
+RUN ls -la && chmod +x gradlew && ls -la
 
-# Executar os testes do Gradle
-# RUN ./gradlew test --no-daemon
+# Verificar line endings e converter se necessário
+RUN apt-get update && apt-get install -y dos2unix && dos2unix gradlew
 
 # Executar o comando de build do Gradle
 RUN ./gradlew build --no-daemon

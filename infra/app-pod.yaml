@@ -19,16 +19,16 @@ spec:
       - name: SPRING_PROFILES_ACTIVE
         value: prod
       - name: SPRING_DATASOURCE_URL
-        value: jdbc:mysql://mysql-srv/lanchonetedb
+        value: jdbc:postgresql://172.18.0.2:5432/lanchonete
       - name: SPRING_DATASOURCE_USERNAME
-        value: sa
+        value: postgres
       - name: SPRING_DATASOURCE_PASSWORD
-        value: password
+        value: admin
       - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
-        value: com.mysql.cj.jdbc.Driver
+        value: org.postgresql.Driver
       - name: SPRING_JPA_HIBERNATE_DDL-AUTO
         value: none
       - name: SPRING_JPA_DATABASE-PLATFORM
-        value: org.hibernate.dialect.MySQL8Dialect
+        value: org.hibernate.dialect.PostgreSQLDialect
     ports:
     - containerPort:  8080
