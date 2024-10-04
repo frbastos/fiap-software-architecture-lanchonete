@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/lanchonete
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://172.18.0.2:5432/lanchonete
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
@@ -19,18 +19,17 @@ services:
     restart: always
 
   db:
-    image: mysql:8.0
+    image: postgres:15
     ports:
-      - "4306:3306"
+      - "5432:5432"
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=lanchonetedb
-      - MYSQL_USER=sa
-      - MYSQL_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=lanchonete
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u root --password=rootpassword || exit 1" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres || exit 1" ]
       interval: 10s
       timeout: 5s
       retries: 5

@@ -53,7 +53,7 @@ spec:
           - name: SPRING_PROFILES_ACTIVE
             value: prod
           - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://localhost:5432/lanchonete
+            value: jdbc:postgresql://172.18.0.2:5432/lanchonete
           - name: SPRING_DATASOURCE_USERNAME
             value: postgres
           - name: SPRING_DATASOURCE_PASSWORD

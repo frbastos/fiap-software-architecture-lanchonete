@@ -19,7 +19,7 @@ spec:
       - name: SPRING_PROFILES_ACTIVE
         value: prod
       - name: SPRING_DATASOURCE_URL
-        value: jdbc:mysql://mysql-srv/lanchonetedb
+        value: jdbc:postgresql://172.18.0.2:5432/lanchonete
       - name: SPRING_DATASOURCE_USERNAME
         value: postgres
       - name: SPRING_DATASOURCE_PASSWORD
