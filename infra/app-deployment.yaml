@@ -19,13 +19,14 @@ spec:
         image: ar989827/lanchonete:v1
         ports:
           - containerPort: 8080
-        # Liveness Probe
-        # livenessProbe:
-        #   httpGet:
-        #     path: /healthz
-        #     port: 8080
-        #   initialDelaySeconds: 3
-        #   periodSeconds: 3
+        #Liveness Probe
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 100
+          periodSeconds: 20
+          failureThreshold: 3
         resources:
           limits:
             cpu: 200m # O pod pode consumir até 500 milicores de CPU
@@ -37,7 +38,7 @@ spec:
           - name: SPRING_PROFILES_ACTIVE
             value: prod
           - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://172.18.0.2:5432/lanchonete
+            value: jdbc:postgresql://postgresql-srv:5432/lanchonetedb
           - name: SPRING_DATASOURCE_USERNAME
             value: postgres
           - name: SPRING_DATASOURCE_PASSWORD
