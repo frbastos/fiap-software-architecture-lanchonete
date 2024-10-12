@@ -7,9 +7,6 @@ CREATE TABLE IF NOT EXISTS product (
     PRIMARY KEY (id)
 );
 
--- Reiniciar a sequência para o campo id
-ALTER SEQUENCE product_id_seq RESTART WITH 1000;
-
 -- Criação da tabela customer
 CREATE TABLE IF NOT EXISTS customer (
     id BIGSERIAL,
@@ -18,9 +15,6 @@ CREATE TABLE IF NOT EXISTS customer (
     mail VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
-
--- Reiniciar a sequência para o campo id
-ALTER SEQUENCE customer_id_seq RESTART WITH 1000;
 
 -- Criação da tabela payment
 CREATE TABLE IF NOT EXISTS payment (
@@ -31,9 +25,6 @@ CREATE TABLE IF NOT EXISTS payment (
     status VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
-
--- Reiniciar a sequência para o campo id
-ALTER SEQUENCE payment_id_seq RESTART WITH 1000;
 
 -- Criação da tabela orders
 CREATE TABLE IF NOT EXISTS orders (
@@ -50,9 +41,6 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (payment_id) REFERENCES payment(id)
 );
 
--- Reiniciar a sequência para o campo id
-ALTER SEQUENCE orders_id_seq RESTART WITH 1000;
-
 -- Criação da tabela order_item
 CREATE TABLE IF NOT EXISTS order_item (
     id BIGSERIAL,
@@ -66,6 +54,3 @@ CREATE TABLE IF NOT EXISTS order_item (
     FOREIGN KEY (product_id) REFERENCES product(id),
     FOREIGN KEY (order_id) REFERENCES orders(id)
 );
-
--- Reiniciar a sequência para o campo id
-ALTER SEQUENCE order_item_id_seq RESTART WITH 1000;

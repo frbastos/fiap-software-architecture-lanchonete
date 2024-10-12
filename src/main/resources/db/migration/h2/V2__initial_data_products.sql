@@ -1,12 +1,11 @@
--- Inserção de dados na tabela products
-INSERT INTO product (id, description, price, category) VALUES (1, 'X-Salada', 25.00, 'SNACK');
-INSERT INTO product (id, description, price, category) VALUES (2, 'X-Bacon', 30.00, 'SNACK');
-INSERT INTO product (id, description, price, category) VALUES (3, 'X-Egg', 27.00, 'SNACK');
-INSERT INTO product (id, description, price, category) VALUES (4, 'Bata Frita', 12.00, 'SIDE_DISH');
-INSERT INTO product (id, description, price, category) VALUES (5, 'Polenta Frita', 12.00, 'SIDE_DISH');
-INSERT INTO product (id, description, price, category) VALUES (6, 'Bata Frota com Cheddar e Bacon', 20.00, 'SIDE_DISH');
-INSERT INTO product (id, description, price, category) VALUES (7, 'Coca-Cola', 7.00, 'DRINK');
-INSERT INTO product (id, description, price, category) VALUES (8, 'Guaraná', 7.00, 'DRINK');
-INSERT INTO product (id, description, price, category) VALUES (9, 'Pepsi', 7.00, 'DRINK');
-INSERT INTO product (id, description, price, category) VALUES (10, 'Pudim', 7.00, 'DESSERT');
-INSERT INTO product (id, description, price, category) VALUES (11, 'Sorvete', 5.00, 'DESSERT');
+INSERT INTO product (description, price, category) VALUES ('X-Salada', 25.00, 'SNACK');
+INSERT INTO product (description, price, category) VALUES ('X-Bacon', 30.00, 'SNACK');
+INSERT INTO product (description, price, category) VALUES ('X-Egg', 27.00, 'SNACK');
+INSERT INTO product (description, price, category) VALUES ('Bata Frita', 12.00, 'SIDE_DISH');
+INSERT INTO product (description, price, category) VALUES ('Polenta Frita', 12.00, 'SIDE_DISH');
+INSERT INTO product (description, price, category) VALUES ('Bata Frota com Cheeder e Bacon', 20.00, 'SIDE_DISH');
+INSERT INTO product (description, price, category) VALUES ('Coca-Cola', 7.00, 'DRINK');
+INSERT INTO product (description, price, category) VALUES ('Guaraná', 7.00, 'DRINK');
+INSERT INTO product (description, price, category) VALUES ('Pepsi', 7.00, 'DRINK');
+INSERT INTO product (description, price, category) VALUES ('Pudim', 7.00, 'DESSERT');
+INSERT INTO product (description, price, category) VALUES ('Sorvete', 5.00, 'DESSERT');
