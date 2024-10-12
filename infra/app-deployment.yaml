@@ -9,39 +9,24 @@ spec:
     matchLabels:
       app: app-deployment
   replicas: 3
-  # strategy:
-  #   rollingUpdate:
-  #     maxSurge: 25%
-  #     maxUnavailable: 25%
-  #   type: RollingUpdate
   template:
     metadata:
       labels:
         app:  app-deployment
     spec:
-      # initContainers:
-        # Init containers are exactly like regular containers, except:
-          # - Init containers always run to completion.
-          # - Each init container must complete successfully before the next one starts.
       containers:
       - name: app-container
         image: ar989827/lanchonete:v1
         ports:
           - containerPort: 8080
-          # Liveness Probe
+        #Liveness Probe
         livenessProbe:
           httpGet:
-            path: /healthz
+            path: /actuator/health
             port: 8080
-          initialDelaySeconds: 3
-          periodSeconds: 3
-          # Readiness Probe
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
+          initialDelaySeconds: 100
+          periodSeconds: 20
+          failureThreshold: 3
         resources:
           limits:
             cpu: 200m # O pod pode consumir até 500 milicores de CPU
@@ -53,7 +38,7 @@ spec:
           - name: SPRING_PROFILES_ACTIVE
             value: prod
           - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://172.18.0.2:5432/lanchonete
+            value: jdbc:postgresql://postgresql-srv:5432/lanchonetedb
           - name: SPRING_DATASOURCE_USERNAME
             value: postgres
           - name: SPRING_DATASOURCE_PASSWORD
@@ -64,37 +49,3 @@ spec:
             value: none
           - name: SPRING_JPA_DATABASE-PLATFORM
             value: org.hibernate.dialect.PostgreSQLDialect
-      #   livenessProbe:
-      #     tcpSocket:
-      #       port: 80
-      #     initialDelaySeconds: 5
-      #     timeoutSeconds: 5
-      #     successThreshold: 1
-      #     failureThreshold: 3
-      #     periodSeconds: 10
-      #   readinessProbe:
-      #     httpGet:
-      #       path: /_status/healthz
-      #       port: 80
-      #     initialDelaySeconds: 5
-      #     timeoutSeconds: 2
-      #     successThreshold: 1
-      #     failureThreshold: 3
-      #     periodSeconds: 10
-      #   env:
-      #   - name: DB_HOST
-      #     valueFrom:
-      #       configMapKeyRef:
-      #         name: app-dep
-      #         key: DB_HOST
-      #   ports:
-      #   - containerPort:  80
-      #     name:  app-dep
-      #   volumeMounts:
-      #   - name: localtime
-      #     mountPath: /etc/localtime
-      # volumes:
-      #   - name: localtime
-      #     hostPath:
-      #       path: /usr/share/zoneinfo/Asia/Shanghai
-      # restartPolicy: Always

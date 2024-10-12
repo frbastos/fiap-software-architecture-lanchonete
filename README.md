@@ -78,6 +78,7 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
     kubectl apply -f pvc.yaml
     kubectl apply -f mysql-srv.yaml
     kubectl apply -f mysql-pod.yaml
+    kubectl apply -f app-srv.yaml
     kubectl apply -f app-deployment.yaml
     kubectl apply -f app-deployment-hpa.yaml
 
@@ -92,13 +93,13 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
     kubectl delete --all deployment
     kubectl delete --all service
     kubectl delete --all pod
-    kubectl delete --all pv
     kubectl delete --all pvc
+    kubectl delete --all pv
 
 ### Acesso ao Swagger
 
 Para acessar a documentação Swagger da API, utilize o seguinte endpoint:
-http://localhost:8080/swagger-ui.html
+http://localhost:31000/swagger-ui.html
     
 ### Infraestrutura para POC
 
