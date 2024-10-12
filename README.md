@@ -92,8 +92,8 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
     kubectl delete --all deployment
     kubectl delete --all service
     kubectl delete --all pod
-    kubectl delete --all pv
     kubectl delete --all pvc
+    kubectl delete --all pv
 
 ### Acesso ao Swagger
 

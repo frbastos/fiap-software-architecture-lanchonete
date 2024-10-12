@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: postgresql
-      image: postgres:14 # Use a versão desejada do PostgreSQL
+      image: postgres:14
       resources:
         limits:
           cpu: 200m
@@ -17,17 +17,17 @@ spec:
           memory: 200Mi
       env:
         - name: POSTGRES_DB
-          value: "lanchonetedb" # Nome do banco de dados a ser criado
+          value: "lanchonetedb"
         - name: POSTGRES_USER
-          value: "postgres" # Nome do usuário
+          value: "postgres"
         - name: POSTGRES_PASSWORD
-          value: "admin" # Senha do usuário
+          value: "admin"
       ports:
-        - containerPort: 5432 # Porta padrão do PostgreSQL
+        - containerPort: 5432
       volumeMounts:
         - name: postgresql-persistent-storage
           mountPath: /var/lib/postgresql/data # Caminho onde o PostgreSQL armazena seus dados
   volumes:
     - name: postgresql-persistent-storage
       persistentVolumeClaim:
-        claimName: lanchonete-pvc # Certifique-se de que o PVC foi criado para o PostgreSQL
+        claimName: lanchonete-pvc
