@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: app-deployment
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
@@ -24,16 +24,16 @@ spec:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 100
+          initialDelaySeconds: 110
           periodSeconds: 20
           failureThreshold: 3
         resources:
           limits:
-            cpu: 200m # O pod pode consumir até 500 milicores de CPU
-            memory: 500Mi # O pod pode consumir até 512Mi de memória
+            cpu: 750m 
+            memory: 750Mi 
           requests:
-            cpu: 100m # O pod solicitará 100 milicores de CPU
-            memory: 200Mi # O pod solicitará 200Mi de memória
+            cpu: 250m 
+            memory: 250Mi
         env:
           - name: SPRING_PROFILES_ACTIVE
             value: prod

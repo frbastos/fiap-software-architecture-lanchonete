@@ -86,7 +86,12 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
   ```bash
   kubectl get pods --watch
 
-5. Limpar o ambiente:
+5. Rode o stress test:
+  ```bash
+  cd test
+  k6 run stress-test.js
+
+6. Limpar o ambiente:
     ```bash
     cd infra
     kubectl delete --all hpa 
