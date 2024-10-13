@@ -61,33 +61,33 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
 ## Entregáveis da 2ª Fase
 
 1. **Atualizar a aplicação desenvolvida na FASE 1 refatorando o código para seguir os padrões clean code e clean architecture:**
- a. Alterar/criar as APIs:
-  i. Checkout Pedido que deverá receber os produtos solicitados e retornar a identificação do pedido.
-  ii. Consultar status pagamento pedido, que informa se o pagamento foi aprovado ou não.
-  iii. Webhook para receber confirmação de pagamento  aprovado ou recusado.
-  iv. A lista de pedidos deverá retorná-los com suas descrições, ordenados com a seguinte regra:
-   1. Pronto > Em Preparação > Recebido;
-   2. Pedidos mais antigos primeiro e mais novos depois;
-   3. Pedidos com status Finalizado não devem aparecer na lista.
-  v. Atualizar o status do pedido.
-  vi. Como desafio extra, opcionalmente, você pode implementar a integração com Mercado Pago para gerar o QRCode para pagamento e integrar com o WebHook para capturar os pagamentos. Caso contrário, será necessário realizar o mock da parte de pagamentos. Como referência, acesse: site do mercado pago.
+  - Alterar/criar as APIs:
+    - Checkout Pedido que deverá receber os produtos solicitados e retornar a identificação do pedido.
+    - Consultar status pagamento pedido, que informa se o pagamento foi aprovado ou não.
+    - Webhook para receber confirmação de pagamento  aprovado ou recusado.
+    - A lista de pedidos deverá retorná-los com suas descrições, ordenados com a seguinte regra:
+      - Pronto > Em Preparação > Recebido;
+      - Pedidos mais antigos primeiro e mais novos depois;
+      - Pedidos com status Finalizado não devem aparecer na lista.
+      - Atualizar o status do pedido.
+    - Como desafio extra, opcionalmente, você pode implementar a integração com Mercado Pago para gerar o QRCode para pagamento e integrar com o WebHook para capturar os pagamentos. Caso contrário, será necessário realizar o mock da parte de pagamentos. Como referência, acesse: site do mercado pago.
 
 2. **Criar uma arquitetura em Kubernetes que atenda os seguintes requisitos:**
- a. Os requisitos funcionais descritos nos itens anteriores (item problema).
- b. Escalabilidade com aumento e diminuição de Pods conforme demanda.
- c. Os arquivos manifestos (yaml) precisam estar no Github junto com a nova versão do código.
+  - Os requisitos funcionais descritos nos itens anteriores (item problema).
+  - Escalabilidade com aumento e diminuição de Pods conforme demanda.
+  - Os arquivos manifestos (yaml) precisam estar no Github junto com a nova versão do código.
 
 3. **Entrega da seguinte documentação no ReadMe:**
- a. Desenho da arquitetura pensado por você, pessoa arquiteta de software, contemplando:
-  i. Os requisitos do negócio (problema).
-  ii. Os requisitos de infraestrutura:
-   1. Você pode utilizar o MiniKube, Docker Kubernetes, AKS, EKS, GKE ou qualquer nuvem que você desenha.
- b. Collection com todas as APIs desenvolvidas com exemplo de requisição (que não seja vazia):
-  i. Link do Swagger no projeto ou link para download da collection do Postman (JSON).
- c. Guia completo com todas as instruções para execução do projeto e a ordem de execução das APIs, caso seja necessário.
- d. Link para vídeo demonstrando a arquitetura desenvolvida na nuvem ou localmente:
-  i. O vídeo deve ser postado no Youtube ou Vimeo.
-  ii. Não esqueça de deixá-lo público ou não listado.
+  - Desenho da arquitetura pensado por você, pessoa arquiteta de software, contemplando:
+    - Os requisitos do negócio (problema).
+    - Os requisitos de infraestrutura:
+      - Você pode utilizar o MiniKube, Docker Kubernetes, AKS, EKS, GKE ou qualquer nuvem que você desenha.
+    - Collection com todas as APIs desenvolvidas com exemplo de requisição (que não seja vazia):
+      - Link do Swagger no projeto ou link para download da collection do Postman (JSON).
+    - Guia completo com todas as instruções para execução do projeto e a ordem de execução das APIs, caso seja necessário.
+    - Link para vídeo demonstrando a arquitetura desenvolvida na nuvem ou localmente:
+      - O vídeo deve ser postado no Youtube ou Vimeo.
+      - Não esqueça de deixá-lo público ou não listado.
 
 ## Configuração e Execução
 
