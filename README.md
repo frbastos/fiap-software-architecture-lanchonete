@@ -82,10 +82,10 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
     - Os requisitos do negócio (problema).
     - Os requisitos de infraestrutura:
       - Você pode utilizar o MiniKube, Docker Kubernetes, AKS, EKS, GKE ou qualquer nuvem que você desenha.
-    - Collection com todas as APIs desenvolvidas com exemplo de requisição (que não seja vazia):
-      - Link do Swagger no projeto ou link para download da collection do Postman (JSON).
-    - Guia completo com todas as instruções para execução do projeto e a ordem de execução das APIs, caso seja necessário.
-    - Link para vídeo demonstrando a arquitetura desenvolvida na nuvem ou localmente:
+  - Collection com todas as APIs desenvolvidas com exemplo de requisição (que não seja vazia):
+    - Link do Swagger no projeto ou link para download da collection do Postman (JSON).
+  - Guia completo com todas as instruções para execução do projeto e a ordem de execução das APIs, caso seja necessário.
+  - Link para vídeo demonstrando a arquitetura desenvolvida na nuvem ou localmente:
       - O vídeo deve ser postado no Youtube ou Vimeo.
       - Não esqueça de deixá-lo público ou não listado.
 
