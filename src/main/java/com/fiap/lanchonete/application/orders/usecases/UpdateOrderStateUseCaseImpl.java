@@ -15,10 +15,10 @@ public class UpdateOrderStateUseCaseImpl implements UpdateOrderStateUseCase {
     }
 
     @Override
-    public void updateState(Long id, OrderState state) {
-        Order order = orderGateway.getById(id).orElseThrow((NotFoundException::new));
+    public Order updateState(Long orderNumber, OrderState state) {
+        Order order = orderGateway.getByOrderNumber(orderNumber).orElseThrow((NotFoundException::new));
         order.updateState(state);
-        orderGateway.save(order);
+        return orderGateway.save(order);
     }
 
 }

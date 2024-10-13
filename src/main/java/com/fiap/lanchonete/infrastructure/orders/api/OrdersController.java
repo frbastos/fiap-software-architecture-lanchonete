@@ -2,9 +2,6 @@ package com.fiap.lanchonete.infrastructure.orders.api;
 
 import java.util.List;
 
-import com.fiap.lanchonete.application.orders.usecases.*;
-import com.fiap.lanchonete.infrastructure.orders.api.dto.*;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +10,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fiap.lanchonete.application.orders.usecases.CreateOrderUseCase;
+import com.fiap.lanchonete.application.orders.usecases.GetAllOrdersUseCase;
+import com.fiap.lanchonete.application.orders.usecases.GetOrderByIdUseCase;
+import com.fiap.lanchonete.application.orders.usecases.GetOrderByOrderNumberUseCase;
+import com.fiap.lanchonete.application.orders.usecases.UpdateOrderStateUseCase;
 import com.fiap.lanchonete.application.payment.usecases.SendQRCODEPaymentToThirdPartyUseCase;
 import com.fiap.lanchonete.application.payment.usecases.command.SendPaymentCommand;
 import com.fiap.lanchonete.domain.orders.entities.Order;
 import com.fiap.lanchonete.domain.orders.valueobjects.OrderState;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderCommandMapper;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderCreateResponse;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderDTOMapper;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderFollowUp;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderGroupedMapper;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderGroupedResponse;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderRequest;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderResponse;
+import com.fiap.lanchonete.infrastructure.orders.api.dto.OrderStatusPaymentResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -86,9 +98,12 @@ public class OrdersController {
         return mapToResponse(this.getOrderByIdUseCase.getOrderById(id).get());
     }
 
-    @PatchMapping("/{id}/state")
-    public void updateOrderState(@PathVariable("id") Long id, @RequestBody OrderState state) {
-        this.updateOrderStateInputPort.updateState(id, state);
+    @PatchMapping("/{orderNumber}/state")
+    public OrderResponse updateOrderState(
+        @PathVariable("orderNumber") Long orderNumber, 
+        @RequestParam(value = "updateState", required = true) OrderState state) {
+        Order updateState = this.updateOrderStateInputPort.updateState(orderNumber, state);
+        return mapToResponse(updateState);
     }
 
     @PostMapping("/create")
