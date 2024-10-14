@@ -102,22 +102,21 @@ Este projeto é um sistema de pedido desenvolvido em Java Spring Boot, que permi
    git clone https://github.com/frbastos/fiap-software-architecture-lanchonete.git
    cd fiap-software-architecture-lanchonete
 
-3. Suba o ambiente:
+2. Suba o ambiente:
     ```bash
     cd infra
     kubectl apply -f pv.yaml
     kubectl apply -f pvc.yaml
-    kubectl apply -f mysql-srv.yaml
-    kubectl apply -f mysql-pod.yaml
-    kubectl apply -f app-srv.yaml
+    kubectl apply -f -svc.yaml
+    kubectl apply -f postgres-pod.yaml
+    kubectl apply -f app-svc.yaml
     kubectl apply -f app-deployment.yaml
     kubectl apply -f app-deployment-hpa.yaml
 
-4. Monitorando os pods:
+3. Monitorando os pods:
   ```bash
-  kubectl get pods --watch
-
-5. Rode o stress test:
+  
+4. Rode o stress test:
   ```bash
   cd test
   k6 run stress-test.js
@@ -145,7 +144,7 @@ http://localhost:31000/swagger-ui.html
 ### Tecnologias Utilizadas
 
 - Java Spring Boot
-- Banco de dados MYSQL
+- Banco de dados Postgresql
 - Docker
 - Docker Compose
 - Swagger
