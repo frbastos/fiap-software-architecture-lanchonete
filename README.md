@@ -155,6 +155,8 @@ http://localhost:31000/swagger-ui.html
 - [Notion do Projeto](https://global-gorilla-13f.notion.site/FIAP-Projeto-Lanchonete-26bfdcca5de84ce8974cbfad8286dcc2)
 - [Miro com Fluxos](https://miro.com/app/board/uXjVK3DvRAo=/?share_link_id=212036327976)
 - [Desenho Arquitetural](https://drive.google.com/file/d/1AEXMlenSdZBZrCMsV1WPH-S74CJdL_mp/view?usp=sharing)
+- [Vídeo de Apresentação](https://vimeo.com/1019505137?share=copy)
+- [Collection Postman](https://drive.google.com/file/d/1HZgAiYLxVELLjTC01PutIsWipLk7AVii/view?usp=sharing)
 
 ## Licença
 
