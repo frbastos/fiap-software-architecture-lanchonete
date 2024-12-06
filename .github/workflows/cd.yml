@@ -2,7 +2,7 @@ name: Deploy to Docker
 on:
   push:
     branches:
-      - main
+      - feat/infra
 jobs:
   deploy:
     runs-on: ubuntu-latest
