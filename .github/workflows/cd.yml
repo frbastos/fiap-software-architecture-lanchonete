@@ -1,8 +1,13 @@
 name: Deploy to Docker
+
 on:
   push:
+    # branches:
+    #   - main 
+  pull_request:
     branches:
-      - feat/infra
+      - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
